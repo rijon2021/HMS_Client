@@ -12,7 +12,7 @@ import { DepartmentDesginationMap } from 'src/app/core/models/settings/departmen
 import { Designation } from 'src/app/core/models/settings/designation';
 import { UserRole } from 'src/app/core/models/settings/userRole';
 import { Users } from 'src/app/core/models/settings/users';
-import { DepartmentDesignationMapService } from 'src/app/core/services/settings/departmentDesignationMap.service';
+// import { DepartmentDesignationMapService } from 'src/app/core/services/settings/departmentDesignationMap.service';
 import { UserService } from 'src/app/core/services/settings/user.service';
 
 
@@ -42,7 +42,7 @@ export class UserCreateComponent implements OnInit {
   constructor(
     public userService: UserService,
     private route: ActivatedRoute,
-    private departmentDesignationMapService: DepartmentDesignationMapService,
+    // private departmentDesignationMapService: DepartmentDesignationMapService,
     private swal: SweetAlertService,
     private router: Router
   ) { }
@@ -93,17 +93,17 @@ export class UserCreateComponent implements OnInit {
     );
   }
 
-  getByDepartmentID(departmentID: number) {
-    this.lstDeptDesignation = [];
-    this.departmentDesignationMapService.getByDepartmentID(departmentID).subscribe(
-      (resp) => {
-        if (resp) {
-          this.lstDeptDesignation = Object.assign(this.lstDeptDesignation, resp);
-          this.lstDeptDesignation = [...this.lstDeptDesignation];
-        }
-      }
-    );
-  }
+  // getByDepartmentID(departmentID: number) {
+  //   this.lstDeptDesignation = [];
+  //   this.departmentDesignationMapService.getByDepartmentID(departmentID).subscribe(
+  //     (resp) => {
+  //       if (resp) {
+  //         this.lstDeptDesignation = Object.assign(this.lstDeptDesignation, resp);
+  //         this.lstDeptDesignation = [...this.lstDeptDesignation];
+  //       }
+  //     }
+  //   );
+  // }
 
   getByID(userID: number) {
     this.userService.getByID(userID).subscribe(
@@ -114,7 +114,7 @@ export class UserCreateComponent implements OnInit {
           this.objUser.signaturePreview = "data:image/png;base64," + this.objUser.signature;
 
           if (this.activateUpdate) {
-            this.getByDepartmentID(this.objUser.departmentID);
+            // this.getByDepartmentID(this.objUser.departmentID);
             this.activateUpdate = false;
           }
         }

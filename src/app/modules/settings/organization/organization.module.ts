@@ -9,15 +9,12 @@ import { UIModule } from 'src/app/shared/ui/ui.module';
 import { OrganizationRoutingModule } from './organization-routing';
 import { OrganizationService } from 'src/app/core/services/settings/organization.service';
 import { OrganizationCreateComponent } from './organization-create/organization-create.component';
-import { OrganizationAdministrativeUnitMapComponent } from './organization-administrative-unit-map/organization-administrative-unit-map.component';
-
 
 
 @NgModule({
   declarations: [
     OrganizationListComponent,
     OrganizationCreateComponent,
-    OrganizationAdministrativeUnitMapComponent
 
   ],
   imports: [

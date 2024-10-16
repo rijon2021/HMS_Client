@@ -27,16 +27,7 @@ import { NotificationAreaService } from 'src/app/core/services/settings/notifica
 import { UserRoleService } from 'src/app/core/services/settings/user-role.service';
 import { OrganizationModule } from './organization/organization.module';
 import { PermissionRoleMapComponent } from './permission-role-map/permission-role-map.component';
-import { DistrictService } from 'src/app/core/services/settings/district.service';
-import { DivisionService } from 'src/app/core/services/settings/division.service';
 import { OrganizationAdministrativeUnitMapService } from 'src/app/core/services/settings/organization-administrative-unit-map.service';
-import { UpazilaCityCorporationService } from 'src/app/core/services/settings/upazila-city-corporation.service';
-import { ThanaService } from 'src/app/core/services/settings/thana.service';
-import { UnionWardService } from 'src/app/core/services/settings/union-ward.service';
-import { VillageAreaService } from 'src/app/core/services/settings/village-area.service';
-import { CountryService } from 'src/app/core/services/settings/country.service';
-import { ParaService } from 'src/app/core/services/settings/para.service';
-import { DepartmentDesignationMapService } from 'src/app/core/services/settings/departmentDesignationMap.service';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -71,7 +62,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     UIModule,
     Ng2SmartTableModule,
     UserModule,
-    OrganizationModule,
+    // OrganizationModule,
     AgGridModule,
     
   ],
@@ -80,16 +71,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     GlobalSettingService,
     NotificationAreaService,
     UserRoleService,
-    CountryService,
-    DivisionService,
-    DistrictService,
-    UpazilaCityCorporationService,
-    ThanaService,
-    UnionWardService,
-    VillageAreaService,
-    ParaService,
     OrganizationAdministrativeUnitMapService, 
-    DepartmentDesignationMapService
   ]
 })
 export class SettingsModule { }

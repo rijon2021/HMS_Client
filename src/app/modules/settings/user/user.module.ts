@@ -9,13 +9,12 @@ import { AgGridModule } from 'ag-grid-angular';
 import { UserService } from 'src/app/core/services/settings/user.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCreateComponent } from './user-create/user-create.component';
-import { UserDpzMapService } from 'src/app/core/services/settings/user-dpz-map.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
     declarations: [
-        UserCreateComponent, 
+        UserCreateComponent,
         UserListComponent,
         ChangePasswordComponent
     ],
@@ -32,7 +31,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ],
     providers:[
         UserService,
-        UserDpzMapService
     ]
 })
 export class UserModule { }

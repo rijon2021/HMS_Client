@@ -6,7 +6,6 @@ import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-al
 import { PageModel } from 'src/app/core/models/core/pageModel';
 import { Department } from 'src/app/core/models/settings/department';
 import { Users } from 'src/app/core/models/settings/users';
-import { DepartmentService } from 'src/app/core/services/settings/department.service';
 import { UserService } from 'src/app/core/services/settings/user.service';
 
 
@@ -40,7 +39,6 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private departmentService: DepartmentService,
     private swal: SweetAlertService,
     private router: Router
   ) { }
