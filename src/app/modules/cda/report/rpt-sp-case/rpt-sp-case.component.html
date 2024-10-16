@@ -1,0 +1,44 @@
+<!-- ==========Designation Add Modal======== -->
+
+<ng-template #modalSPCaseReport let-modal>
+  <div class="modal-header">
+    <div class="">
+      <h4 class="modal-title" id="modal-basic-title">Print Information</h4>
+    </div>
+    <div class="">
+      <button type="button" class="btn btn-danger me-2" (click)="modalClose()"><i class="fas fa-times"></i>
+        Close</button>
+      <button type="button" class="btn btn-success" onclick="portraitPrintHTML('printBIReport')"><i
+          class="fas fa-print"></i>
+        Print Report</button>
+    </div>
+  </div>
+  <div class="modal-body">
+    <app-rpt-bc-case-inspection-print [fileID]="fileMasterID"></app-rpt-bc-case-inspection-print>
+  </div>
+</ng-template>
+
+<div class="container-fluid">
+  <app-page-title title="{{pageTitle}}"></app-page-title>
+  <div class="row">
+    <div class="col-md-6 my-1">
+      <button *ngIf="showEdit && userRoleID!=40" [disabled]="!fileMasterID" (click)="onEdit()" class="btn btn-primary me-2"><i
+          class="fa fa-edit"></i> Edit </button>
+
+          <button *ngIf="userRoleID==40" [disabled]="!fileMasterID" (click)="onEdit()" class="btn btn-info me-2"><i
+            class="fa fa-eye"></i> View </button>
+    </div>
+    <div class="col-md-6 my-1">
+      <div class="text-end">
+        <button [disabled]="!fileMasterID" (click)="printModal('BI')" class="btn btn-success me-1"><i
+            class="fa fa-print"></i> Print </button>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <ag-grid-angular style="width: 100%; height: 75vh;" class="ag-theme-alpine" [rowData]="lstApplicationFileMaster"
+        [columnDefs]="columnDefs" [gridOptions]="gridOptions" (selectionChanged)="onSelect()"
+        (gridReady)="onGridReady($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>

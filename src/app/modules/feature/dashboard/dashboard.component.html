@@ -1,0 +1,160 @@
+<!-- <app-loader></app-loader> -->
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Dashboard</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item active">Welcome to Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div *ngIf="adminDashboard && adminDashboard.adminDashboardFileTypeWiseList" class="row"
+                [ngClass]="{'dashboard-wrapper-1': adminDashboard.adminDashboardFileTypeWiseList.length === 1,'dashboard-wrapper-2': adminDashboard.adminDashboardFileTypeWiseList.length === 2, 'dashboard-wrapper-3': adminDashboard.adminDashboardFileTypeWiseList.length === 3}"
+                style="min-height: 185px;">
+                <div *ngFor="let stat of adminDashboard.adminDashboardFileTypeWiseList; let i=index;" class="col">
+                    <div class="card mini-stats-wid card-link active-card-{{i}}"
+                        [ngClass]="activeClass==stat.applicationType ? 'active-box' : ''" id="statID{{i}}"
+                        [ngStyle]="{'border' : '1px solid' + stat.border, 'background-color' : stat.colorCode}"
+                        (click)="loadData(stat)">
+                        <div class="card-body">
+                            <h5 class="mb-2">{{stat.applicationTypeDescription}}</h5>
+                            <div class="media">
+                                <div class="media-body">
+                                    <!-- <h6 class="mb-2">({{stat.applicationTypeName}})</h6> -->
+                                    <p class="mb-0"><span>Total File : {{stat.totalFile}}</span> </p>
+                                    <p class="mb-0"><span>Visited : {{stat.visited}}</span></p>
+                                    <p class="mb-0"><span>Pending : {{stat.totalFile - stat.visited}}</span></p>
+                                </div>
+                                <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                    <span class="avatar-title">
+                                        <i class="bx bxs-business font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" [ngStyle]="{'border-top': '3px solid' + selectedApplicationType.border}">
+                <div class="card-body p-3">
+                    <h4 class="card-title mb-2">Officer Wise File List
+                        <span *ngIf="selectedApplicationType.applicationTypeName">
+                            ({{selectedApplicationType.applicationTypeName}})</span>
+                    </h4>
+
+                    <div class="table-responsive mb-0">
+                        <table class="table table-bordered table-striped table-centered table-nowrap dsb-main-table">
+                            <thead>
+                                <tr class="active-tr"
+                                    [ngStyle]="{'background-color' : selectedApplicationType.colorCode}">
+                                    <th class="text-left">Name</th>
+                                    <th class="text-left">Department</th>
+                                    <th class="text-center">Total File</th>
+                                    <th class="text-center">Inspection Completed</th>
+                                    <th class="text-center">Inspection Pending</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let data of adminDashboard.adminDashboardFileUserWiseList">
+                                    <tr>
+                                        <td>{{data.userFullNameBangla}}</td>
+                                        <td>{{data.departmentNameBangla}}</td>
+                                        <td class="text-center">{{data.totalFile}}</td>
+                                        <td class="text-center"><span
+                                                class="badge badge-pill badge-soft-success font-size-13 custome-link cursor-pointer"
+                                                (click)="getListByUser(data, true)">{{data.visited}}</span></td>
+                                        <td class="text-center"><span
+                                                class="badge badge-pill badge-soft-danger font-size-13 custome-link cursor-pointer"
+                                                (click)="getListByUser(data, false)">{{data.totalFile
+                                                -data.visited}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="data.isFileDetails">
+                                        <td colspan="5">
+                                            <div class="file-details-box" [ngClass]="{
+                                                    'active-table-completed': showVisitedResult,
+                                                    'active-table-pending': !showVisitedResult
+                                                }">
+                                                <div class="table-responsive mb-0">
+                                                    <table class="table table-centered table-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center">SL</th>
+                                                                <th class="text-center">File/Ref No</th>
+                                                                <th class="text-center">Applicant Name</th>
+                                                                <th class="text-center">Thana</th>
+                                                                <th class="text-center">Mouza</th>
+                                                                <th class="text-center">Assign Date <span
+                                                                        (click)="dataSort(1)"><i
+                                                                            class="fa fa-{{assignDateSortOrder}}"></i></span>
+                                                                </th>
+                                                                <th *ngIf="showVisitedResult" class="text-center">Visit
+                                                                    Date <span (click)="dataSort(2)"><i
+                                                                            class="fa fa-{{visitDateSortOrder}}"></i></span>
+                                                                </th>
+                                                                <th *ngIf="showVisitedResult" class="text-center">Place
+                                                                    of Inspection (POI)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr
+                                                                *ngFor="let data of adminDashboard.adminDashboardFileListUserWise; let i = index">
+                                                                <td class="text-center"> {{i + 1}}</td>
+                                                                <td>{{data.refNo}}</td>
+                                                                <td class="text-center"><span class="text-optimize"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        ngbTooltip="{{data.applicantName}}">{{data.applicantName}}</span>
+                                                                </td>
+                                                                <td class="text-center">{{data.thanaName}}</td>
+                                                                <td class="text-center">{{data.mouzaName}}</td>
+                                                                <td class="text-center">{{data.assignDate |
+                                                                    date:'dd-MMM-yyyy'}}</td>
+                                                                <!-- <td>{{data.targetDate | date:'dd-MMM-yyyy'}}</td> -->
+                                                                <td *ngIf="data.isVisited" class="text-center">
+                                                                    {{data.visitDate |
+                                                                    date:'dd-MMM-yyyy'}}</td>
+                                                                <!-- <td>{{data.isVisited}}</td> -->
+                                                                <!-- <td><span
+                                                                        class="badge badge-pill badge-soft-success font-size-16 cursor-pointer">PO
+                                                                        <i class="bx bx-street-view "></i></span></td> -->
+                                                                <td *ngIf="data.isVisited" class="text-center">
+                                                                    <button
+                                                                        class="badge badge-pill badge-soft-success font-size-16 cursor-pointer"
+                                                                        (click)="goToInspectionMonitoring(data.refNo, data.isVisited)">
+                                                                        <i class="bx bx-street-view "></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end table -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

@@ -1,0 +1,243 @@
+<div class="row justify-content-center mb-2">
+  <div class="col-md-10">
+    <div id="printBIReport" style="background-color: #fff;padding: 20px;">
+      <div class="main-report">
+        <header class="text-center">
+          <h4 style=" font-size: 16px; font-weight: 500; ">চট্টগ্রাম উন্নয়ন কর্তৃপক্ষ</h4>
+          <h4 style=" font-size: 16px; font-weight: 500; ">চউক ভবন, চট্টগ্রাম</h4>
+          <h5 style=" font-size: 14px; ">টেকনিক্যাল প্রতিবেদন</h5>
+        </header>
+        <hr>
+        <main class="print-main-body">
+
+          <div class="bi-genral-info">
+            <table class="print-table" style="width: 100%;">
+              <tr>
+                <td style="width: 160px;">ইমারত নির্মাণ নথি নম্বর</td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objFileMasterWithDetails.refNo}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="7">
+                  প্রতিবেদন নিম্নে বর্ণিত ছকে প্রদান করা হইল।
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">ইমারতের বাবহার</td>
+                <td style="width: 15px;">:</td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_StructureUse}}</span>
+                </td>
+                <td style="width: 105px;">তলার পরিমান </td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_StructureFloor}}</span>
+                </td>
+                <td style="width: 160px;">ভূমির পরিমাপ (বর্গমি:) </td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_StructureArea}}</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="7">প্রতি ফ্লোর সাইজ (বর্গমি:)</td>
+              </tr>
+              <tr>
+                <td colspan="7">
+                  <table class="print-table inner-border-table">
+                    
+                    <tr>
+                      <td>
+                        <span>নীচ তলা :</span> <span style="border-bottom: 1px dashed #000;display: inline;">{{objInspectionDetails.tR_FloorSize1st}} </span> <span>(বর্গমি)</span>
+                      </td>
+                      <td>
+                        <span>TYPICAL </span> <span style="border-bottom: 1px dashed #000;display: inline;"></span> হইতে তলা পর্যন্ত  <span style="border-bottom: 1px dashed #000;display: inline;"> {{objInspectionDetails.tR_FloorSizeTillTypical}} </span> <span> (বর্গমি)</span>
+                      </td>
+                      <td>
+                        <span> MGC নীচ </span>  <span style="border-bottom: 1px dashed #000;display: inline;"> {{objInspectionDetails.tR_MGCGroundFloor}} </span>   <span>তলা (%)</span><span style="border-bottom: 1px dashed #000;display: inline;"></span> 
+                      </td>
+                      <td>
+                        <span> MGC TyPical(S) </span> <span style="border-bottom: 1px dashed #000;display: inline;"></span>  <span> হইতে তলা পর্যন্ত</span> <span style="border-bottom: 1px dashed #000;display: inline;"> {{objInspectionDetails.tR_FloorSizeTillTypical}} </span> 
+                      </td>
+                      <td>
+                        <span>MGC LIMIT (%): </span> <span style="border-bottom: 1px dashed #000;display: inline;"> {{objInspectionDetails.tR_MGCLimit}}</span> 
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <tr>
+                <td style="width: 160px;">ভূমি ব্যবহার ছাড়পত্র </td>
+                <td style="width: 15px;">:</td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_LandClearanceNo}}</span>
+                </td>
+                <td style="width: 105px;">জমার তারিখ :</td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_LandClearanceReceiveDate}}</span>
+                </td>
+                <td style="width: 160px;">প্রদানের তারিখ : </td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_LandClearanceSubmitDate}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;"> </td>
+                <td style="width: 15px;"></td>
+                <td> </td>
+                <td style="width: 105px;">বিশেষ প্রকল্প ছাড়পত্র নং :</td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_LandSpecialClearanceNo}}</span>
+                </td>
+                <td style="width: 160px;">জমার তারিখ :</td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_LandSpecialClearanceReceiveDate}}</span>
+                </td>
+              </tr>
+              <tr>
+               <td colspan="5"></td>
+                <td  style="width: 160px;">প্রদানের তারিখ :</td>
+                <td>
+                  <span class="text-unterline">{{objInspectionDetails.tR_LandSpecialClearanceSubmitDate}}</span>
+                </td>
+              </tr>
+                            
+              <tr>
+                <td style="width: 160px;">রাস্তার নাম </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_ConnectedRoadName}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">রাস্তার প্রশস্থতা (স্থিত) </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_ConnectedRoadWidth}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">রাস্তার প্রশস্থতা (প্রস্তাবিত) </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_ConnectedRoadWidthProposed}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">রাস্তার ছাড় </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_RoadConcessions}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">থানার নাম </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_ThanaID}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">মৌজা নাম </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_MouzaID}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">নকশা প্রণয়নকারী স্থপতি/প্রতিষ্ঠান </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_DesignCompany}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">ফোন নাম্বার </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_DesignCompanyMobile}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">নকশা প্রণয়নকারী প্রকৌশলী </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_DesignEngineer}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">ফোন নাম্বার </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_DesignEngineerMobile}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">ইমারত পরিদর্শক </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.investigationOfficerName}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">ফোন নাম্বার </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.investigationOfficerMobileNo}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">VOID এর সংখ্যা </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_VOIDNo}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">VOID এর পরিমাপ </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_VOIDSize}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">ফ্ল্যাট সংখ্যা </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_FlatCount}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">কারপার্কিং সংখ্যা </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_CarParkingCount}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 160px;">মোটরবাইক পার্কিং সংখ্যা </td>
+                <td style="width: 15px;">:</td>
+                <td colspan="5">
+                  <span class="text-unterline">{{objInspectionDetails.tR_BikeParkingCount}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5"></td>
+                <td class="text-end">নাম :</td>
+                <td>
+                    <span class="text-unterline">{{objInspectionDetails.tR_AuthorisedBy}}</span>
+                    <span class="text-unterline mt-2">সহকারী অথরাইজড অফিসার, <br> অথরাইজেশন বিভাগ-২</span>
+                </td>
+              </tr>
+
+            </table>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

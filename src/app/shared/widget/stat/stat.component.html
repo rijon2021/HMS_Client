@@ -1,0 +1,20 @@
+<div class="card mini-stats-wid card-link card-ui-{{count}} active-card-{{count}}" (click)="cardLink(5)">
+  <div class="card-body">
+    <div class="media">
+      <div class="media-body">
+        <h5 class="mb-2">{{title}}</h5>
+        <p class="mb-0"><span>Total File : {{total}}</span> </p>
+        <p class="mb-0"><span>Completed : {{inspectionCompleted}}</span></p>
+        <p class="mb-0"><span >Pending : {{inspectionIncompleted}}</span></p>
+      </div>
+
+      <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+        <span class="avatar-title">
+          <i class="bx {{icon}} font-size-24"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- end card-body -->
+</div>
+<!-- end card -->

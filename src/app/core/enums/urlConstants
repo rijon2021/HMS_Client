@@ -1,0 +1,6 @@
+
+
+import { environment } from './../../../environments/environment';
+export const UrlConstants = {
+    baseUrl: environment.base_url,
+}

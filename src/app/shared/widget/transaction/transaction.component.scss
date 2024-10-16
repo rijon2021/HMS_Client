@@ -1,0 +1,16 @@
+
+.custome-link:hover::after{
+    content: "\f022";
+    font-family: "Font Awesome 5 Free"; 
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
+.file-details-box{
+    background: #43bdf54b;
+    border: 2px solid #016a9b4b;
+}
+.cursor-pointer{
+    cursor: pointer;
+}

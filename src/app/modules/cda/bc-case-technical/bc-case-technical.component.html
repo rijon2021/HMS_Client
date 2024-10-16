@@ -1,0 +1,317 @@
+<div class="container-fluid">
+  <app-page-title title="BC Case Technical Edit"></app-page-title>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row justify-content-center">
+            <div class="col-md-5">
+              <div class="row">
+                <!--  ===========Section 1  ৪। (ক) প্রস্তাবিত নির্মাণ স্থলের বাস্তব মাপ============== -->
+                <div class="col-md-12">
+                  <h4 class="card-title ">সাধারণ তথ্য</h4>
+                </div>
+                <hr>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="refNo" class="col-md-4 col-form-label">ইমারত নির্মাণ নথির নম্বর </label>
+                    <div class="col-md-8">
+                      <input id="refNo" type="text" class="form-control" autocomplete="off" readonly
+                        [(ngModel)]="objFileMasterWithDetails.refNo">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="tR_StructureUse" class="col-md-4 col-form-label">ইমারতের বাবহার</label>
+                    <div class="col-md-8">
+                      <input id="tR_StructureUse" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_StructureUse">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="tR_StructureFloor" class="col-md-4 col-form-label">তলার পরিমান</label>
+                    <div class="col-md-8">
+                      <input id="tR_StructureFloor" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_StructureFloor">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="tR_StructureArea" class="col-md-4 col-form-label">ভূমির পরিমাপ (বর্গমি:)</label>
+                    <div class="col-md-8">
+                      <input id="tR_StructureArea" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_StructureArea">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                  <h4 class="card-title ">প্রতি ফ্লোর সাইজ ঃ (বর্গমিটার)</h4>
+                </div>
+                <hr>
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="tR_FloorSize1st" class="col-md-4 col-form-label">নীচ তলা</label>
+                    <div class="col-md-8">
+                      <input id="tR_FloorSize1st" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_FloorSize1st">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">হইতে তলা পর্যন্ত</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_FloorSizeTillTypical">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">MGC নীচ তলা</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_MGCGroundFloor">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">MGC Typical(%) তলা পর্যন্ত</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_MGCLimit">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">ভূমি ব্যবহার ছাড়পত্র</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_LandClearanceNo">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">জমার তারিখ</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="date" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_LandClearanceReceiveDate">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">প্রদানের তারিখ</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="date" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_LandClearanceSubmitDate">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">বিশেষ প্রকল্প ছাড়পত্র নং</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_LandSpecialClearanceNo">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">জমার তারিখ</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="date" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_LandSpecialClearanceReceiveDate">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">প্রদানের তারিখ</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="date" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_LandSpecialClearanceSubmitDate">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">রাস্তার নাম</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_ConnectedRoadName">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">রাস্তার প্রশস্থতা (স্থিত)</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_ConnectedRoadWidth">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">রাস্তার প্রশস্থতা (প্রস্তাবিত)</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_ConnectedRoadWidthProposed">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">রাস্তার ছাড়</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_RoadConcessions">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">থানার নাম</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objFileMasterWithDetails.thanaNameBangla" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">মৌজা নাম</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objFileMasterWithDetails.mouzaNameBangla" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">নকশা প্রণয়নকারী স্থপতি/প্রতিষ্ঠান</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_DesignCompany">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">ফোন নাম্বার</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_DesignCompanyMobile">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">নকশা প্রণয়নকারী প্রকৌশলী</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_DesignEngineer">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">ফোন নাম্বার</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_DesignEngineerMobile">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">ইমারত পরিদর্শক</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_DesignEngineer" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">ফোন নাম্বার</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_DesignEngineerMobile" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">VOID এর সংখ্যা</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_VOIDNo">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">VOID এর পরিমাপ</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_VOIDSize">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">ফ্ল্যাট সংখ্যা</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_FlatCount">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">কারপার্কিং সংখ্যা</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_CarParkingCount">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-4 col-form-label">মোটরবাইক পার্কিং সংখ্যা</label>
+                    <div class="col-md-8">
+                      <input id="applicantName" type="text" class="form-control" autocomplete="off" 
+                        [(ngModel)]="objInspectionDetails.tR_BikeParkingCount">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <div class="col-md-12 text-end">
+                      <button class="btn btn-success" (click)="update()"><i class="fa fa-save"></i> সাবমিট</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,428 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-end">
+        <span style="cursor: pointer;" (click)="searchToggler()"><i class="fa fa-fw fa-bars"></i></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8" [ngClass]="searchToggle ? 'col-lg-8' : 'col-lg-12'" @inOutPaneAnimation2>
+      <div class="card">
+        <div class="card-body">
+          <agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom" [mapTypeId]="mapType"
+            [fullscreenControl]='true' [mapTypeControl]='true' (mapClick)="changePickupMarkerLocation($event)"
+            (mapReady)="onMapReady($event)">
+
+            <agm-marker *ngFor="let attachment of lstAttachmentWithLocation" [latitude]="attachment.latitude"
+              [longitude]="attachment.longitude" [iconUrl]="getContentMarkerIcon(attachment.attachementTypeID)"
+              [markerClickable]="true" (markerClick)="mediaMarkerClicked(attachment.referenceID, $event)">
+              <agm-info-window [isOpen]="false" #infoWindow (infoWindowClose)="changePickupMarkerLocation($event)">
+                <div class="agm-info-content-wrapper">
+                  <div *ngIf="attachment.attachementTypeID === 1" class="p-2 rich-attachment-box audio-attachment-box">
+                    <audio alt="" width="200" height="100" style="margin: 5px;" controls>
+                      <source src="{{attachment.attachmentLink}}">
+                    </audio>
+
+                    <span>
+                      {{attachment.createdDate | date:'dd-MMM-yyyy'}}
+                    </span>
+                  </div>
+
+                  <div *ngIf="attachment.attachementTypeID === 2" class="p-2 rich-attachment-box image-attachment-box">
+                    <a class="elem" href="{{attachment.attachmentLink}}"
+                      style="display: block; margin: 5px; width: fit-content;">
+                      <img style="width: fit-content; max-width: 125px; height: 130px; border: 2px solid #9b9b9b;"
+                        src="{{attachment.attachmentLink}}" alt="">
+                    </a>
+
+                    <span>
+                      {{attachment.createdDate | date:'dd-MMM-yyyy'}}
+                    </span>
+                  </div>
+
+                  <div *ngIf="attachment.attachementTypeID === 3" class="p-2 rich-attachment-box video-attachment-box">
+                    <video alt="" width="280" height="150" style="border: 2px solid #9b9b9b; margin: 5px;" controls>
+                      <source src="{{attachment.attachmentLink}}">
+                    </video>
+
+                    <span>
+                      {{attachment.createdDate | date:'dd-MMM-yyyy'}}
+                    </span>
+                  </div>
+                </div>
+              </agm-info-window>
+            </agm-marker>
+
+            <agm-marker *ngFor="let location of lstApplicationFileMaster_checked" [latitude]="location.latitude"
+              [longitude]="location.longitude" [iconUrl]="'./assets/images/rtims/location.png'" [markerClickable]="true"
+              (markerClick)="markerClicked(location.applicationFileMasterID, $event)">
+              <agm-info-window [isOpen]="false" #infoWindow (infoWindowClose)="changePickupMarkerLocation($event)">
+                <div class="agm-info-content-wrapper">
+                  <!-- ============= Agm Info Window Modal Tab Header =========== -->
+                  <ul ngbNav #customNav="ngbNav" [activeId]="1" class="nav-tabs nav-tabs-custom nav-justified">
+                    <li [ngbNavItem]="1">
+                      <a (click)="attachmentTabLink(0)" ngbNavLink>
+                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                        <span class="d-none d-sm-block">File Details</span>
+                      </a>
+                      <ng-template ngbNavContent>
+                        <ng-template [ngTemplateOutlet]="fileDetails"></ng-template>
+                      </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="3">
+                      <a (click)="attachmentTabLink(4)" ngbNavLink>
+                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                        <span class="d-none d-sm-block">Bird Eye View</span>
+                      </a>
+                      <ng-template ngbNavContent>
+                        <ng-template [ngTemplateOutlet]="birdEyeView"></ng-template>
+                      </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="4">
+                      <a (click)="attachmentTabLink(2)" ngbNavLink>
+                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                        <span class="d-none d-sm-block">Image</span>
+                      </a>
+                      <ng-template ngbNavContent>
+                        <ng-template [ngTemplateOutlet]="imageData"></ng-template>
+                      </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="5">
+                      <a (click)="attachmentTabLink(3)" ngbNavLink>
+                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                        <span class="d-none d-sm-block">Video</span>
+                      </a>
+                      <ng-template ngbNavContent>
+                        <ng-template [ngTemplateOutlet]="videoData"></ng-template>
+                      </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="6">
+                      <a (click)="attachmentTabLink(1)" ngbNavLink>
+                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                        <span class="d-none d-sm-block">Voice</span>
+                      </a>
+                      <ng-template ngbNavContent>
+                        <ng-template [ngTemplateOutlet]="voiceData"></ng-template>
+                      </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="2">
+                      <a (click)="attachmentTabLink(5)" ngbNavLink>
+                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                        <span class="d-none d-sm-block">Others</span>
+                      </a>
+                      <ng-template ngbNavContent>
+                        <ng-template [ngTemplateOutlet]="fileData"></ng-template>
+                      </ng-template>
+                    </li>
+                  </ul>
+
+                  <!-- ============= Agm Info Window Modal Tab Header =========== -->
+                  <div [ngbNavOutlet]="customNav"></div>
+
+                  <!-- ============= Agm Info Window Modal Tab Content =========== -->
+
+                  <ng-template #fileDetails>
+                    <div class="attachment-box p-3">
+                      <table class="table table-bordered application-details-table">
+                        <tbody>
+                          <tr>
+                            <td><strong>Application File ID : </strong>{{location.applicationFileMasterID}}</td>
+                            <td><strong>File/Ref No : </strong>{{location.refNo}}</td>
+                          </tr>
+
+                          <tr>
+                            <td colspan="2"><strong>Applicant Name : </strong>{{location.applicantName}}</td>
+                          </tr>
+
+                          <tr>
+                            <td><strong>Application Type : </strong> {{location.applicationTypeName}}</td>
+                          </tr>
+
+                          <tr>
+                            <td><strong>Assign By : </strong> {{location.assignByNameBangla}}</td>
+                            <td><strong> Assign Date : </strong> {{location.assignDate | date:"dd-MMM-yyyy"}}</td>
+                          </tr>
+
+                          <tr>
+                            <td><strong> DPZ Name : </strong> {{location.dpzName}}</td>
+                            <td><strong>Mouza Name : </strong> {{location.mouzaName}}</td>
+                          </tr>
+
+                          <tr>
+                            <td><strong>Thana Name : </strong> {{location.thanaName}}</td>
+                            <td><strong> Road : </strong> {{location.road}}</td>
+                          </tr>
+
+                          <tr>
+                            <td><strong>Latitude : </strong> {{location.latitude}}</td>
+                            <td><strong> Longitude : </strong> {{location.longitude}}</td>
+                          </tr>
+
+                          <tr>
+                            <td><strong>BS No : </strong> {{location.bsNo}}</td>
+                            <td><strong> RS No : </strong> {{location.rsNo}}</td>
+                          </tr>
+
+                          <tr>
+                            <td><strong> Updated By : </strong> {{location.updatedByFullNameBangla}}</td>
+                            <!-- <td><strong>userFullName : </strong> {{location.userFullName}}</td> -->
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #fileData>
+                    <div class="p-3 attachment-box">
+                      <!-- <h5>Attachment File</h5> -->
+                      <table class="table table-content-layout table-file-layout">
+                        <colgroup>
+                          <col style="width: 10%;">
+                          <col style="width: 15%;">
+                          <col style="width: 45%;">
+                          <col style="width: 15%;">
+                          <col style="width: 20%;">
+                          <col style="width: 20%;">
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th>SL</th>
+                            <th>Type</th>
+                            <th>Attachment Name</th>
+                            <th>Format</th>
+                            <th>Download Link</th>
+                            <th>Uploaded On</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of lstAttachmentSingleType; let i=index;">
+                            <td><strong>{{i+1}}</strong></td>
+                            <td><strong>{{data.referenceType}}</strong></td>
+                            <td><strong>{{data.attachmentName}}</strong></td>
+                            <td><strong>{{data.fileFormat}}</strong></td>
+                            <td><a class="btn-sm btn-primary" href="{{data.attachmentLink}}">Download</a></td>
+                            <td><strong>{{data.createdDate | date: 'dd-MMM-yyyy'}}</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #birdEyeView>
+                    <div class="p-3 attachment-box">
+                      <table class="table table-content-layout">
+                        <thead>
+                          <tr>
+                            <th>SL</th>
+                            <th>Type</th>
+                            <th>Content</th>
+                            <th>Uploaded On</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of lstAttachmentSingleType; let i=index;">
+                            <td><strong>{{i+1}}</strong></td>
+                            <td><strong>{{data.referenceType}}</strong></td>
+                            <td class="rich-content" align="center">
+                              <a class="elem" href="{{data.attachmentLink}}"
+                                style="display: block; margin: 5px; width: fit-content;">
+                                <img
+                                  style="width: fit-content; max-width: 140px; height: 90px; border: 2px solid #9b9b9b;"
+                                  src="{{data.attachmentLink}}" alt="">
+                              </a>
+                            </td>
+                            <td><strong>{{data.createdDate | date:
+                                'dd-MMM-yyyy'}}</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #imageData>
+                    <div class="p-3 attachment-box">
+                      <table class="table table-content-layout">
+                        <thead>
+                          <tr>
+                            <th>SL</th>
+                            <th>Type</th>
+                            <th>Content</th>
+                            <th>Uploaded On</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of lstAttachmentSingleType; let i=index;">
+                            <td><strong>{{i+1}}</strong></td>
+                            <td><strong>{{data.referenceType}}</strong></td>
+                            <td class="rich-content" align="center">
+                              <a class="elem" href="{{data.attachmentLink}}"
+                                style="display: block; margin: 5px; width: fit-content;">
+                                <img
+                                  style="width: fit-content; max-width: 140px; height: 90px; border: 2px solid #9b9b9b;"
+                                  src="{{data.attachmentLink}}" alt="">
+                              </a>
+                            </td>
+                            <td><strong>{{data.createdDate | date:
+                                'dd-MMM-yyyy'}}</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #videoData>
+                    <div class="attachment-box p-3">
+                      <table class="table table-content-layout">
+                        <thead>
+                          <tr>
+                            <th>SL</th>
+                            <th>Type</th>
+                            <th>Content</th>
+                            <th>Uploaded On</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of lstAttachmentSingleType; let i=index;">
+                            <td><strong>{{i+1}}</strong></td>
+                            <td><strong>{{data.referenceType}}</strong></td>
+                            <td class="rich-content" align="center">
+                              <video alt="" width="280" height="150" controls>
+                                <source src="{{data.attachmentLink}}">
+                              </video>
+                            </td>
+                            <td><strong>{{data.createdDate | date:
+                                'dd-MMM-yyyy'}}</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #voiceData>
+                    <div class="attachment-box p-3">
+                      <table class="table table-content-layout">
+                        <thead>
+                          <tr>
+                            <th>SL</th>
+                            <th>Type</th>
+                            <th>Content</th>
+                            <th>Uploaded On</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of lstAttachmentSingleType; let i=index;">
+                            <td><strong>{{i+1}}</strong></td>
+                            <td><strong>{{data.referenceType}}</strong></td>
+                            <td class="rich-content" align="center">
+                              <audio alt="" width="200" height="100" controls>
+                                <source src="{{data.attachmentLink}}">
+                              </audio>
+                            </td>
+                            <td><strong>{{data.createdDate | date:
+                                'dd-MMM-yyyy'}}</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-template>
+
+                  <!-- ============= Agm Info Window Modal Tab Content =========== -->
+                </div>
+              </agm-info-window>
+            </agm-marker>
+          
+            <agm-polygon [strokeColor]="'red'" [strokeWeight]="4" [paths]="lstCoordPolygonPts">
+            </agm-polygon>
+          </agm-map>
+        </div>
+      </div>
+    </div> <!-- end col 8-->
+
+    <div class="col-lg-4" *ngIf="searchToggle" @inOutPaneAnimation>
+      <div class="monitoring-search-box">
+        <div class="card" style="min-height: 83vh;">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="search-pannel">
+                  <app-application-file-master-search (searchData)="searchData($event)">
+                  </app-application-file-master-search>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2 row">
+              <div class="col-md-6">
+                <h5>Search Results <span class="badge badge-soft-primary badge-pill ms-2 font-size-13">
+                    {{lstApplicationFileMaster.length}}</span></h5>
+              </div>
+              <div class="col-md-6">
+                <div class="float-end">
+                  <!-- <button class="btn-xs btn-outline-primary" *ngIf="lstApplicationFileMaster">Total </button> -->
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="list-search-info">
+                  <div class="table-responsive h-290">
+                    <table class="table table-bordered custom-table-padding table-search-result">
+                      <colgroup>
+                        <col style="width: 7%;">
+                        <col style="width: 8%;">
+                        <col style="width: 15%;">
+                        <col style="width: 18%;">
+                        <col style="width: 23%;">
+                        <col style="width: 23%;">
+                        <col style="width: 41%;">
+                        <col style="width: 25%;">
+                        <col style="width: 27%;">
+                      </colgroup>
+
+                      <thead>
+                        <tr>
+                          <th>
+                            <input type="checkbox" class="mt-1" [(ngModel)]="pageModel.isCheckAll"
+                              (change)="onCheckAllFileMaster()">
+                          </th>
+                          <th>SL</th>
+                          <th>Extd View</th>
+                          <th>DPZ</th>
+                          <th>Thana</th>
+                          <th>Mouza</th>
+                          <th>File No</th>
+                          <th>Visit Date <span (click)="sortOnVisitDate()"><i
+                                class="fa fa-{{visitDateSortOrder}}"></i></span></th>
+                          <th>Inv Officer</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of lstApplicationFileMaster; let i=index">
+                          <td> <input type="checkbox" [disabled]="!data.isVisited" [(ngModel)]="data.isChecked"
+                              (change)="onCheckFileMaster(data)"> </td>
+                          <td>{{i+1}}</td>
+                          <td><span *ngIf="data.isChecked" (click)="onClickExtendedView(data)"><i
+                                class="fa fa-eye clickable"></i></span></td>
+                          <td>{{data.dpzName}}</td>
+                          <td>{{data.thanaName}}</td>
+                          <td>{{data.mouzaName}}</td>
+                          <td>{{data.refNo}}</td>
+                          <td>{{data.visitDate | date: "dd-MMM-yyyy"}}</td>
+                          <td>{{data.invOfficerFullNameBangla}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end row -->
+</div>

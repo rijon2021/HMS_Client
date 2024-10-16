@@ -1,0 +1,6 @@
+.inner-border-table tr td{
+    border: 1px solid #999;
+}
+.print-table tr td {
+    vertical-align: bottom;
+}

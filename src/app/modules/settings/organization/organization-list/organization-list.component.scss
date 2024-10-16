@@ -1,0 +1,27 @@
+.filter-list {
+    position: absolute;
+    right: 0px;
+    top: 42px;
+    background: #fff;
+    z-index: 555;
+    width: 220px;
+    padding: 10px;
+    box-shadow: 0 0 4px #c1c1c1;
+}
+
+.filter-list ul {
+    list-style: none;
+    padding-left: 5px;
+}
+
+.filter-list ul li {
+    font-size: 15px;
+}
+
+.grid-cell-centered {
+    text-align: center;
+}
+.ag-grid-text-center{
+    text-align: center;
+
+}

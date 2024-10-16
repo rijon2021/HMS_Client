@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <app-page-title title="Organization List" ></app-page-title>
+    <div class="row">
+      <div class="col-md-10 my-1">
+        <button (click)="addOrganization()" class="btn btn-success me-1"><i class="fa fa-plus"></i> Add New</button>
+        <button *ngIf="selectedOrganization.organizationID > 0" (click)="editOrganization()" class="btn btn-primary mx-1"><i
+            class="fa fa-edit"></i> Edit Organization</button>
+        <button (click)="onBtnExport()" class="btn btn-outline-info mx-1"><i class="fas fa-file-excel"></i> Excel</button>
+      </div>
+      <!-- <div class="col-md-2">
+        <div style="position: relative;">
+          <div class="float-end">
+            <button (click)="filterToggler()" class="btn btn-outline-dark mx-1"><i class="fas fa-filter"></i></button>
+  
+          </div>
+          <div class="filter-list" *ngIf="isActiveFilter== true">
+            <ul>
+              <li *ngFor="let oItem of columnDefs">
+                <input type="checkbox" id="{{'id' + oItem.field}}" [(ngModel)]="oItem.isVisible"
+                  (change)="onChangeColName(oItem)">
+                &nbsp;
+                <label for="{{'id' + oItem.field}}" class="pl-2"> {{oItem.headerName}}</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+  
+      <div class="col-lg-12">
+        <ag-grid-angular style="width: 100%; height: 75vh;" class="ag-theme-alpine" [rowData]="lstOrganization"
+          [columnDefs]="columnDefs" [gridOptions]="gridOptions" (selectionChanged)="onSelect()"
+          (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <!----Page Title----->
+    <app-page-title title="Permission Role Map"></app-page-title>
+    <div class="row" *ngIf="selectedUserRole.userRoleID > 0">
+        <div class="col-md-6">
+            <label> Selected User Role :
+                {{selectedUserRole.userRoleName}}</label>
+
+            <div class="float-end">
+                <button type="button" class="btn btn-success" (click)="updatePermission()"><i class="fa fa-check"></i>
+                    Update Permissions</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="user-role-box">
+                <div class="table-responsive">
+                    <table class="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>User Role Name</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="list-row" *ngFor="let oItem of lstUserRole; let i=index"
+                                (click)="onClickUserRole(oItem.userRoleID)">
+                                <td>{{i+1}}</td>
+                                <td>{{oItem.userRoleName}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="accordion permission-accordion">
+                <ul class="accordion-item ">
+                    <ng-container class="accordion-header" *ngFor="let node of lstvmPermissionUserRoleMap"
+                        [ngTemplateOutlet]="treeNode" [ngTemplateOutletContext]="{ $implicit: node }">
+                    </ng-container>
+                </ul>
+
+                <ng-template #treeNode let-data>
+                    <li id="{{'treeMenu_'+data.permissionID}}">
+                        <button class="accordion-button d-flex justify-content-between"
+                            [ngClass]="{'collapse-hide' : data.isCollapsed == true, 'collapse-show' : data.isCollapsed == false, 'has-child' : (data.childList.length>0 && data.isCollapsed != true)}"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                            aria-controls="collapseOne">
+                            <div class="prm-checkbox-col">
+                                <input *ngIf="this.selectedUserRole && this.selectedUserRole.userRoleID" type="checkbox"
+                                    (click)="onCheckPermission(data)" [(ngModel)]="data.isChecked"
+                                    class="form-check-input mt-1">
+                            </div>
+                            <div class="icon-group-col ps-0" (click)="onTreeToggle(data)">
+                                <span class="permission-type-icon" *ngIf="data.permissionType == 1"><i
+                                        class="bx bx-link"></i></span>
+                                <span class="permission-type-icon" *ngIf="data.permissionType == 2"><i
+                                        class="bx bx-dialpad"></i></span>
+                                <span class="permission-type-icon" *ngIf="data.permissionType == 3"><i
+                                        class="bx bx-user"></i></span>
+                                <span>{{data.displayName}}</span>
+                            </div>
+                        </button>
+
+                    </li>
+                    <ng-container *ngIf="data.childList">
+                        <ul *ngIf="!data.isCollapsed">
+                            <ng-container *ngFor="let child of data.childList" [ngTemplateOutlet]="treeNode"
+                                [ngTemplateOutletContext]="{ $implicit: child }">
+                            </ng-container>
+                        </ul>
+                    </ng-container>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+</div>

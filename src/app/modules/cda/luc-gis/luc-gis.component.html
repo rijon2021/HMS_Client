@@ -1,0 +1,276 @@
+
+<div class="container-fluid">
+  <app-page-title title="GIS LUC"></app-page-title>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="row">
+                <!--  ===========Section 1  ৪। (ক) প্রস্তাবিত নির্মাণ স্থলের বাস্তব মাপ============== -->
+                <div class="col-md-12">
+                  <h4 class="card-title ">GIS অপারেটর সিস্টেম ফরমেট </h4>
+                </div>
+                <hr>
+
+                <!-- <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="refNo" class="col-md-3 col-form-label">ইমারত নির্মাণ নথির নম্বর </label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="text" value="" id="refNo"
+                        [(ngModel)]="objFileMasterWithDetails.refNo" autocomplete="off" >
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-3 col-form-label">আবেদনকারীর নাম </label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="text" value="" id="applicantName"
+                        [(ngModel)]="objFileMasterWithDetails.applicantName" autocomplete="off" readonly>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-3 col-form-label">আর এস</label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="text" value="" id="applicantName"
+                        [(ngModel)]="objFileMasterWithDetails.rsNo" autocomplete="off" readonly>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-3 col-form-label">বি এস</label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="text" value="" id="applicantName"
+                        [(ngModel)]="objFileMasterWithDetails.bsNo" autocomplete="off" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-3 col-form-label">থানা</label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="text" id="applicantName"
+                        [(ngModel)]="objFileMasterWithDetails.thanaNameBangla" autocomplete="off" readonly>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-3 col-form-label">মৌজা</label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="text" value="" id="applicantName"
+                        [(ngModel)]="objFileMasterWithDetails.mouzaNameBangla" autocomplete="off" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-3 col-form-label">DAP Zoning</label>
+                    <div class="col-md-9">
+                      <input class="form-control" type="text" value="" id="applicantName"
+                        [(ngModel)]="objFileMasterWithDetails.dpzNameBangla" autocomplete="off" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-3 col-form-label">বিবরণ</label>
+                    <div class="col-md-9">
+                      <textarea class="form-control" type="text" value="" id="applicantName"
+                        [(ngModel)]="objLUC.giS_Description" ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-8 col-form-label">DAP অনুযায়ী এলাইমেনট প্রস্তাবনা/ক্ষতিগ্রস্ত</label>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_DAPAlignmentApprovalOrDamaged"
+                              id="giS_DAPAlignmentApprovalOrDamagedYes" [(ngModel)]="objLUC.giS_DAPAlignmentApprovalOrDamaged" [value]="'হ্যাঁ'">
+                            <label class="form-check-label pt-0" for="giS_DAPAlignmentApprovalOrDamagedYes">
+                              হ্যাঁ
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_DAPAlignmentApprovalOrDamaged"
+                              id="giS_DAPAlignmentApprovalOrDamagedNo" [(ngModel)]="objLUC.giS_DAPAlignmentApprovalOrDamaged"
+                              [value]="'না'">
+                            <label class="form-check-label pt-0" for="giS_DAPAlignmentApprovalOrDamagedNo">
+                              না
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_DAPAlignmentApprovalOrDamaged"
+                              id="giS_DAPAlignmentApprovalOrDamagedNA" [(ngModel)]="objLUC.giS_DAPAlignmentApprovalOrDamaged"
+                              [value]="'প্রযোজ্য নয়'">
+                            <label class="form-check-label pt-0" for="giS_DAPAlignmentApprovalOrDamagedNA">
+                              প্রযোজ্য নয়
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-8 col-form-label">ইনিবি-২০০৮ অনুযায়ী সাইট সংলগ্ন বাস্তার প্রস্থকরণ প্রস্তাবনা রয়েছে কি না</label>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsENIBI2008_SiteAttachedRoadExtensionProposed"
+                              id="giS_IsENIBI2008_SiteAttachedRoadExtensionProposedYes" [(ngModel)]="objLUC.giS_IsENIBI2008_SiteAttachedRoadExtensionProposed" [value]="'হ্যাঁ'">
+                            <label class="form-check-label pt-0" for="giS_IsENIBI2008_SiteAttachedRoadExtensionProposedYes">
+                              হ্যাঁ
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsENIBI2008_SiteAttachedRoadExtensionProposed"
+                              id="giS_IsENIBI2008_SiteAttachedRoadExtensionProposedNo" [(ngModel)]="objLUC.giS_IsENIBI2008_SiteAttachedRoadExtensionProposed"
+                              [value]="'না'">
+                            <label class="form-check-label pt-0" for="giS_IsENIBI2008_SiteAttachedRoadExtensionProposedNo">
+                              না
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsENIBI2008_SiteAttachedRoadExtensionProposed"
+                              id="giS_IsENIBI2008_SiteAttachedRoadExtensionProposedNA" [(ngModel)]="objLUC.giS_IsENIBI2008_SiteAttachedRoadExtensionProposed"
+                              [value]="'প্রযোজ্য নয়'">
+                            <label class="form-check-label pt-0" for="giS_IsENIBI2008_SiteAttachedRoadExtensionProposedNA">
+                              প্রযোজ্য নয়
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-6 col-form-label">GIS ডাটাবেস অনুযায়ী জমির শ্রেণী</label>
+                    <div class="col-md-6">
+                      <select name="" class="form-select" [(ngModel)]="objLUC.giS_DBLandClassification">
+                        <option value="কৃষি জমি">কৃষি জমি</option>
+                        <option value="পুকুর">পুকুর</option>
+                        <option value="ভিটা">ভিটা</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-8 col-form-label">ইতি মধ্যে বর্ণিত স্থানে/প্রস্তাবিত সাইট সংলগ্ন রাস্তার বরাবরে কোন আবেদন পড়েছে কি না</label>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsSiteAttachedRoadAlreadyApplied"
+                              id="giS_IsSiteAttachedRoadAlreadyAppliedYes" [(ngModel)]="objLUC.giS_IsSiteAttachedRoadAlreadyApplied" [value]="'হ্যাঁ'">
+                            <label class="form-check-label pt-0" for="giS_IsSiteAttachedRoadAlreadyAppliedYes">
+                              হ্যাঁ
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsSiteAttachedRoadAlreadyApplied"
+                              id="giS_IsSiteAttachedRoadAlreadyAppliedNo" [(ngModel)]="objLUC.giS_IsSiteAttachedRoadAlreadyApplied"
+                              [value]="'না'">
+                            <label class="form-check-label pt-0" for="giS_IsSiteAttachedRoadAlreadyAppliedNo">
+                              না
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsSiteAttachedRoadAlreadyApplied"
+                              id="giS_IsSiteAttachedRoadAlreadyAppliedNA" [(ngModel)]="objLUC.giS_IsSiteAttachedRoadAlreadyApplied"
+                              [value]="'প্রযোজ্য নয়'">
+                            <label class="form-check-label pt-0" for="giS_IsSiteAttachedRoadAlreadyAppliedNA">
+                              প্রযোজ্য নয়
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-0 row">
+                    <label for="applicantName" class="col-md-8 col-form-label">প্রস্তাবিত জমিতে অভিযোগ আছে কি না</label>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsProposedLandObjected"
+                              id="giS_IsProposedLandObjectedYes" [(ngModel)]="objLUC.giS_IsProposedLandObjected" [value]="'হ্যাঁ'">
+                            <label class="form-check-label pt-0" for="giS_IsProposedLandObjectedYes">
+                              হ্যাঁ
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsProposedLandObjected"
+                              id="giS_IsProposedLandObjectedNo" [(ngModel)]="objLUC.giS_IsProposedLandObjected"
+                              [value]="'না'">
+                            <label class="form-check-label pt-0" for="giS_IsProposedLandObjectedNo">
+                              না
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-check form-radio-primary my-2">
+                            <input class="form-check-input" type="radio" name="giS_IsProposedLandObjected"
+                              id="giS_IsProposedLandObjectedNA" [(ngModel)]="objLUC.giS_IsProposedLandObjected"
+                              [value]="'প্রযোজ্য নয়'">
+                            <label class="form-check-label pt-0" for="giS_IsProposedLandObjectedNA">
+                              প্রযোজ্য নয়
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               
+
+                <div class="col-md-12 mt-3">
+                  <div class="mb-0 row">
+                    <div class="col-md-12 text-end">
+                      <button class="btn btn-primary" (click)="save()"><i class="fa fa-save"></i> সাবমিট</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<!-- ==========District Add Modal======== -->
+
+<ng-template #modalDistrict let-modal>
+  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">District Information</h4>
+    </div>
+    <div class="modal-body">
+      <div class="col-md-12">
+        <div class="mb-2 row">
+          <label for="districtID" class="col-md-5 col-form-label">Division</label>
+          <div class="col-md-7">
+            <select id="districtID" class="form-select" [(ngModel)]="selectedDistrict.divisionDistrictMap.divisionID"
+              formControlName="divisionID">
+              <option *ngFor="let division of lstDivision" [value]="division.divisionID">{{division.divisionName}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-2 row">
+          <label for="districtName" class="col-md-5 col-form-label">District Name</label>
+          <div class="col-md-7">
+            <input id="districtName" class="form-control" type="text" [(ngModel)]="selectedDistrict.districtName"
+              formControlName="districtName">
+          </div>
+        </div>
+        <div class="mb-2 row">
+          <label for="districtName" class="col-md-5 col-form-label">District Code</label>
+          <div class="col-md-7">
+            <input id="districtName" class="form-control" type="text" [(ngModel)]="selectedDistrict.districtCode"
+              formControlName="districtCode">
+          </div>
+        </div>
+        <div class="mb-2 row">
+          <label for="districtNameBangla" class="col-md-5 col-form-label">District Name (বাংলা)</label>
+          <div class="col-md-7">
+            <input id="districtNameBangla" class="form-control" type="text"
+              [(ngModel)]="selectedDistrict.districtNameBangla" formControlName="districtNameBangla">
+          </div>
+        </div>
+        <div class="mb-2 row">
+          <label for="Status" class="col-md-5 col-form-label">Status</label>
+          <div class="col-md-7">
+            <div class="form-check form-switch form-switch-md mb-3">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="selectedDistrict.divisionDistrictMap.isActive" id="Status" formControlName="isActive">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fas fa-times"></i>
+        Close</button>
+      <button type="button" type="submit" *ngIf="!selectedDistrict.districtID" [disabled]="!reactiveForm.valid"
+        class="btn btn-success"><i class="fas fa-save"></i>
+        Save</button>
+      <button type="button" type="submit" *ngIf="selectedDistrict.districtID>0" [disabled]="!reactiveForm.valid"
+        class="btn btn-success"><i class="fas fa-save"></i>
+        Update</button>
+    </div>
+  </form>
+
+</ng-template>
+<!-- ==========District Add Modal======== -->
+
+<div class="container-fluid">
+  <app-page-title title="District List"></app-page-title>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="filter-section">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row align-items-center">
+                  <label class="col-md-5 control-label">Country :</label>
+                  <div class="col-md-7">
+                    <select class="form-select" name="" id="" [(ngModel)]="queryObject.countryID"
+                      (change)="filter(); getDivisionListByCountry()">
+                      <option value="0">All</option>
+                      <option *ngFor="let obj of lstCountry" [value]="obj.countryID">{{obj.countryName}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row align-items-center">
+                  <label class="col-md-5 control-label">Division :</label>
+                  <div class="col-md-7">
+                    <select class="form-select" name="" id="" [(ngModel)]="queryObject.divisionID"
+                      [disabled]="!queryObject.countryID || queryObject.countryID == 0" (change)="filter()">
+                      <option value="0">All</option>
+                      <option *ngFor="let obj of getDivisionListByCountry()" [value]="obj.divisionID">
+                        {{obj.divisionName}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1 text-end">
+            <!-- <button class="btn btn-outline-secondary btn-sm rounded fs-6" (click)="filter()" title="Search"><i
+                class="fa fa-search"></i> Search</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row my-2">
+        <div class="col-md-3">
+          <a> Total Entry : <span class="badge bg-secondary p-2">{{lstDistrict.length}}</span></a>
+        </div>
+        <div class="col-md-9 text-end">
+          <button (click)="add()" class="btn btn-success me-1"><i class="fa fa-plus"></i> Add New</button>
+          <button *ngIf="selectedDistrict.districtID > 0" (click)="edit()" class="btn btn-primary mx-1"><i
+              class="fa fa-edit"></i> Edit District</button>
+          <button *ngIf="selectedDistrict.districtID > 0" (click)="remove()" class="btn btn-danger mx-1"><i
+              class="fa fa-minus"></i> Delete District</button>
+          <button (click)="onBtnExport()" class="btn btn-outline-dark mx-1"><i class="fas fa-file-excel"></i>
+            Excel</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <ag-grid-angular style="width: 100%; height: 75vh;" class="ag-theme-alpine" [rowData]="lstDistrict"
+        [columnDefs]="columnDefs" [components]="frameworkComponents" [gridOptions]="gridOptions"
+        (selectionChanged)="onSelect()" (gridReady)="onGridReady($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>

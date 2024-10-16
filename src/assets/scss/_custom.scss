@@ -1,0 +1,15 @@
+
+// dropdown
+p{
+    font-size: 14px;
+}
+.dropdown-toggle {
+    &:after {
+        display: none;        
+    }
+}
+
+.btn-sm {
+    padding: 6px 10px;
+    border: 1px solid transparent;
+}

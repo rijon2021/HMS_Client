@@ -1,0 +1,201 @@
+.dashboard-wrapper-1,
+.dashboard-wrapper-2,
+.dashboard-wrapper-3 {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+@media (max-width: 550px) {
+    .col {
+        flex: unset;
+    }
+}
+
+@media (min-width: 550px) {
+    .dashboard-wrapper-1 {
+        width: 50%;
+    }
+
+    .dashboard-wrapper-2 {
+        width: 90%;
+    }
+}
+
+@media (min-width: 550px) and (max-width: 700px) {
+    .dashboard-wrapper-3 {
+        width: 100%;
+
+        .col:first-of-type {
+            flex: auto;
+        }
+    }
+}
+
+@media (min-width: 651px) {
+    .dashboard-wrapper-1 {
+        width: 40%;
+    }
+
+    .dashboard-wrapper-2 {
+        width: 80%;
+    }
+}
+
+@media (min-width: 831px) and (max-width: 992px) {
+    .dashboard-wrapper-3 {
+        width: 90%;
+    }
+}
+
+@media (min-width: 992px) {
+    .dashboard-wrapper-1 {
+        width: 40%;
+    }
+
+    .dashboard-wrapper-2 {
+        width: 70%;
+    }
+}
+
+@media (min-width: 993px) {
+    .dashboard-wrapper-3 {
+        width: 95%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .dashboard-wrapper-1 {
+        width: 30%;
+    }
+
+    .dashboard-wrapper-2 {
+        width: 50%;
+    }
+
+    .dashboard-wrapper-3 {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1300px) {
+    .dashboard-wrapper-3 {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1460px) {
+    .dashboard-wrapper-1 {
+        width: 20%;
+    }
+
+    .dashboard-wrapper-2 {
+        width: 40%;
+    }
+
+    .dashboard-wrapper-3 {
+        width: 60%;
+    }
+}
+
+// =================Stat/box Section 
+
+.avatar-title {
+    background-color: #008c45;
+}
+
+.card-ui-1 {
+    border: 1px solid #43bcf5;
+    background-color: #43bdf54b;
+    cursor: pointer;
+}
+
+.card-ui-2 {
+    border: 1px solid #1acf41;
+    background-color: #43f55b2d;
+    cursor: pointer;
+}
+
+.card-ui-3 {
+    border: 1px solid #4364f5;
+    background-color: #436cf54b;
+    cursor: pointer;
+}
+
+.card-ui-4 {
+    border: 1px solid #e043f5;
+    background-color: #e643f54b;
+    cursor: pointer;
+}
+
+.card-ui-5 {
+    border: 1px solid #f54343;
+    background-color: #f543434b;
+    cursor: pointer;
+}
+
+.mini-stats-wid {
+    cursor: pointer;
+}
+
+.mini-stats-wid:hover,
+.active-box {
+    border-bottom-width: 5px !important;
+}
+
+.active-box::after {
+    content: '';
+    background: inherit;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    transform: rotate(45deg);
+    position: absolute;
+    bottom: -15px;
+    z-index: -1;
+    left: 43%;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    opacity: .25;
+}
+
+.active-box .card-body {
+    z-index: 555;
+}
+
+.custome-link:hover::after {
+    content: "\f022";
+    font-family: "Font Awesome 5 Free";
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.active-table-completed {
+    background: #9adaf82d;
+    border: 2px solid #016a9b4b;
+}
+
+.active-table-pending {
+    background: #ff919142;
+    border: 2px solid #f53c3c71;
+}
+
+.cursor-pointer:hover {
+    cursor: pointer;
+}
+
+.text-optimize {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    width: 200px;
+}
+
+.read-more-icon {
+    position: absolute;
+}
+
+.dsb-main-table tr th,
+.dsb-main-table tr td {
+    border: 1px solid #cdd7f9;
+}

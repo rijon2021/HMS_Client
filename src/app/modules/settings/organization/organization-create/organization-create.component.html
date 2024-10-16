@@ -1,0 +1,200 @@
+<div class="container-fluid">
+    <app-page-title title="Organization Information"></app-page-title>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <h4 class="card-title">Create User</h4> -->
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="organizationName" class="col-md-3 col-form-label">Organization
+                                            Name</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="organizationName"
+                                                [(ngModel)]="objOrganization.organizationName" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="UserType" class="col-md-3 col-form-label">Organization Type</label>
+                                        <div class="col-md-9">
+                                            <select class="form-select" id="UserType"
+                                                [(ngModel)]="objOrganization.organizationType">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let oItem of lstOrganizationType" [value]="oItem.id">
+                                                    {{oItem.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>   
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="organizationNameBangla" class="col-md-3 col-form-label">Organization
+                                            Name (বাংলা)</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="OrganizationNameBangla"
+                                                [(ngModel)]="objOrganization.organizationNameBangla" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="organizationShortName" class="col-md-3 col-form-label">Short Name</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="organizationShortName"
+                                                [(ngModel)]="objOrganization.organizationShortName" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="organizationCode" class="col-md-3 col-form-label">Organization Code</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="organizationCode"
+                                                [(ngModel)]="objOrganization.organizationCode" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="address" class="col-md-3 col-form-label">Address</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="address"
+                                                [(ngModel)]="objOrganization.address" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="publicURL" class="col-md-3 col-form-label">Public URL</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="publicURL"
+                                                [(ngModel)]="objOrganization.publicURL" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="privateURL" class="col-md-3 col-form-label">Private URL</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="privateURL"
+                                                [(ngModel)]="objOrganization.privateURL" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="contactPersonID" class="col-md-3 col-form-label">Contact
+                                            Person</label>
+                                        <div class="col-md-9">
+                                            <select class="form-select" id="contactPersonID"
+                                                [(ngModel)]="objOrganization.contactPersonID">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let oItem of lstUsers" [value]="oItem.userAutoID">
+                                                    {{oItem.userFullName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="mobileNo" class="col-md-3 col-form-label">Mobile No</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="mobileNo"
+                                                [(ngModel)]="objOrganization.mobileNo" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="email" class="col-md-3 col-form-label">Email</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="email"
+                                                [(ngModel)]="objOrganization.email" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="latitude" class="col-md-3 col-form-label">Latitude</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="latitude"
+                                                [(ngModel)]="objOrganization.latitude" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="longitude" class="col-md-3 col-form-label">Longitude</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" value="" id="longitude"
+                                                [(ngModel)]="objOrganization.longitude" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="longitude" class="col-md-3 col-form-label">Organization Logo</label>
+                                        <div class="col-md-9">
+                                            <input type="file" class="form-control" name="image"
+                                                (change)="onChangeImage($event, 1)">
+                                            <img *ngIf="objOrganization.organizationLogoPreview"
+                                                [src]="objOrganization.organizationLogoPreview" alt="" width="100px"
+                                                height="80px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                        <label for="longitude" class="col-md-3 col-form-label">Product Logo</label>
+                                        <div class="col-md-9">
+                                            <input type="file" class="form-control" name="image"
+                                                (change)="onChangeImage($event, 2)">
+                                            <img *ngIf="objOrganization.productLogoPreview"
+                                                [src]="objOrganization.productLogoPreview" alt="" width="100px"
+                                                height="80px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="mb-3 row">
+                                <div class="col-md-5">
+                                    <div class="text-end">
+                                        <button *ngIf="!objOrganization.organizationID" type="button"
+                                            class="btn btn-success m-1" (click)="saveOrganization()"><i
+                                                class="fa fa-save"></i>
+                                            Save
+                                        </button>
+                                        <button *ngIf="objOrganization.organizationID" type="button"
+                                            class="btn btn-success m-1" (click)="updateOrganization()"><i
+                                                class="fa fa-check"></i>
+                                            Update
+                                        </button>
+                                        <button *ngIf="objOrganization.organizationID > 0" type="button"
+                                            class="btn btn-danger m-1" (click)="deleteOrganization()"><i
+                                                class="fa fa-minus"></i>
+                                            Delete
+                                        </button>
+                                        <button type="button" class="btn btn-dark m-1" (click)="goToList()"><i
+                                                class="fa fa-arrow-right"></i>
+                                            Go To List
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->

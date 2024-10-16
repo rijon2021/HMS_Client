@@ -1,0 +1,42 @@
+<!-- ========== Left Sidebar Start ========== -->
+
+<ng-template #contentTemplate>
+  <!--- Sidemenu -->
+  <div id="sidebar-menu">
+    <!-- Left Menu Start -->
+    <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
+      <!-- Node Tree Container -->
+      <ng-container *ngFor="let node of lstmenuItems" [ngTemplateOutlet]="treeNode"
+        [ngTemplateOutletContext]="{ $implicit: node }">
+      </ng-container>
+      <ng-template #treeNode let-data>
+        <li>
+          <a (click)="onToggle(data)" href="javascript:void(0);" class="is-parent"
+            [ngClass]="{'has-arrow': !data.isCollapsed, 'has-dropdown-collapsed': data.hasChild && data.isCollapsed, 'has-dropdown-expanded': data.hasChild && !data.isCollapsed, 'link-active': data.isLinkActive}">
+            <i class="bx {{data.iconName}}" *ngIf="data.iconName"></i>
+            <span> {{ data.displayName}}</span>
+          </a>
+        </li>
+        <ng-container *ngIf="data.childList">
+          <ul [ngStyle]="{'display': data.isCollapsed ? 'none' : 'block'}" *ngIf="!data.isCollapsed">
+            <ng-container *ngFor="let child of data.childList" [ngTemplateOutlet]="treeNode"
+              [ngTemplateOutletContext]="{ $implicit: child }">
+            </ng-container>
+          </ul>
+        </ng-container>
+      </ng-template>
+    </ul>
+  </div>
+</ng-template>
+
+<div class="vertical-menu">
+  <ngx-simplebar class="h-100" #componentRef>
+    <div *ngIf="!isCondensed">
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </div>
+    <div *ngIf="isCondensed">
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </div>
+  </ngx-simplebar>
+</div>
+<!-- Left Sidebar End -->

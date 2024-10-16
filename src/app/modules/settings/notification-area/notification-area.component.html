@@ -1,0 +1,72 @@
+<!-- ==========Permission Add Modal======== -->
+<ng-template #modalEditNotificationArea let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update Notification Information</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12">
+            <div class="mb-2 row">
+                <label for="notificationAreaName" class="col-md-3 col-form-label">Notification Area Name</label>
+                <div class="col-md-9">
+                    <input id="notificationAreaName" class="form-control" type="text"
+                        [(ngModel)]="selectedNotification.notificationAreaName">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="notificationBody" class="col-md-3 col-form-label">Notification Type</label>
+                <div class="col-md-9">
+                    <select class="form-select" [(ngModel)]="selectedNotification.notificationType">
+                        <option value="0">Select</option>
+                        <option *ngFor="let ntype of lstNotificationType" value="{{ntype.id}}">{{ntype.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="notificationBody" class="col-md-3 col-form-label">Notification Body</label>
+                <div class="col-md-9">
+                    <textarea name="" id="notificationBody" class="form-control"
+                        [(ngModel)]="selectedNotification.notificationBody"></textarea>
+                    <!-- <input id="notificationBody" class="form-control"  type="text" [(ngModel)]="selectedNotification.notificationBody" > -->
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="ExpireTime" class="col-md-3 col-form-label">Expire Time</label>
+                <div class="col-md-9">
+                    <input id="ExpireTime" class="form-control" type="number" value="6"
+                        [(ngModel)]="selectedNotification.expireTime">
+                </div>
+            </div>
+            <div class="row">
+                <label for="isActive" class="col-md-3 col-form-label">Is Active</label>
+                <div class="form-check form-switch form-switch-lg col-md-9">
+                    <input class="form-check-input" type="checkbox" id="isActive" checked
+                        [(ngModel)]="selectedNotification.isActive">
+                    <!-- <label class="form-check-label" for="formCheckcolor1">
+                        Checkbox Primary
+                    </label> -->
+                </div>
+                <!-- <ui-switch defaultBoColor="#dfdfdf" color="#00b19d" checked></ui-switch> -->
+                <!-- <input id="notificationBody" class="form-control"  type="text" [(ngModel)]="selectedNotification.notificationBody" > -->
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fa fa-times"></i> Close</button>
+        <button type="button" class="btn btn-success" (click)="updateNotificationArea()"><i class="fas fa-save"></i>
+            Save</button>
+    </div>
+</ng-template>
+<!-- ==========Permission Add Modal======== -->
+<div class="container-fluid">
+    <app-page-title title="Notification Area" ></app-page-title>
+    <div class="row">
+        <div class="col-lg-12">
+            <ag-grid-angular style="width: 100%; height: 75vh;" class="ag-theme-alpine" [rowData]="lstNotificationArea"
+                [columnDefs]="columnDefs" [gridOptions]="gridOptions" (selectionChanged)="onSelect()"
+                (gridReady)="onGridReady($event)" [components]="frameworkComponents">
+            </ag-grid-angular>
+        </div>
+    </div>
+</div>

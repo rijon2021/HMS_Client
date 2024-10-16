@@ -1,0 +1,172 @@
+<!-- ==========Permission Add Modal======== -->
+<ng-template #modalPermission let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Permission Information</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12">
+            <div class="mb-2 row">
+                <label for="displayName" class="col-md-4 col-form-label">Display Name</label>
+                <div class="col-md-8">
+                    <input id="displayName" class="form-control" type="text"
+                        [(ngModel)]="selectedPermission.displayName">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="permissionName" class="col-md-4 col-form-label">Permission Name</label>
+                <div class="col-md-8">
+                    <input id="permissionName" class="form-control" type="text"
+                        [(ngModel)]="selectedPermission.permissionName">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="permissionType" class="col-md-4 col-form-label">Permission Type</label>
+                <div class="col-md-8">
+                    <select id="permissionType" class="form-select" [(ngModel)]="selectedPermission.permissionType">
+                        <option value="0">Select</option>
+                        <option value="1">Menu</option>
+                        <option value="2">Page</option>
+                        <option value="3">Button</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-2 row">
+                <label for="routePath" class="col-md-4 col-form-label">Route Path</label>
+                <div class="col-md-8">
+                    <input id="routePath" class="form-control" type="text" [(ngModel)]="selectedPermission.routePath">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="iconName" class="col-md-4 col-form-label">Icon Name</label>
+                <div class="col-md-8">
+                    <input id="iconName" class="form-control" type="text" [(ngModel)]="selectedPermission.iconName">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="orderNo" class="col-md-4 col-form-label">Order No</label>
+                <div class="col-md-8">
+                    <input id="orderNo" class="form-control" type="text" [(ngModel)]="selectedPermission.orderNo">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="isVisible" class="col-md-4 col-form-label">Visible</label>
+                <div class="form-check form-switch form-switch-lg col-md-8">
+                    <input class="form-check-input" type="checkbox" id="isVisible"
+                        [(ngModel)]="selectedPermission.isVisible">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="isActive" class="col-md-4 col-form-label">Status</label>
+                <div class="form-check form-switch form-switch-lg col-md-8">
+                    <input class="form-check-input" type="checkbox" id="isActive"
+                        [(ngModel)]="selectedPermission.isActive">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fas fa-times"></i>
+            Close</button>
+        <button type="button" class="btn btn-success" (click)="savePermission()"><i class="fas fa-save"></i>
+            Save</button>
+    </div>
+    <div *ngIf="selectedPermission && selectedPermission.childList && selectedPermission.childList.length > 0">
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <label>** Please Drag & Drop for ordering Sub Menus...</label>
+                <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-theme-alpine"
+                    [rowData]="selectedPermission.childList" [columnDefs]="columnDefs" [gridOptions]="gridOptions"
+                    (gridReady)="onGridReady($event) " [rowDragManaged]="true" [animateRows]="true">
+                </ag-grid-angular>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fa fa-times"></i>
+                Close</button>
+            <button type="button" class="btn btn-success" (click)="saveOrderPermission()"><i class="fa fa-check"></i>
+                Update Order</button>
+        </div>
+    </div>
+
+</ng-template>
+
+<!-- ==========Permission Add Modal======== -->
+
+
+<div class="container-fluid">
+    <!----Page Title----->
+    <app-page-title title="Permission"></app-page-title>
+    <!---Page Title--->
+    <div class="accordion permission-accordion">
+        <span *ngIf="actionToMove" (click)="cancelMovePermission()" class="badge bg-danger" style="font-size: 14px;"><i
+                class="fa fa-times"></i> Cancel Move
+        </span>
+        <ul class="accordion-item ">
+            <ng-container class="accordion-header" *ngFor="let node of lstPermissions" [ngTemplateOutlet]="treeNode"
+                [ngTemplateOutletContext]="{ $implicit: node }">
+            </ng-container>
+        </ul>
+
+        <ng-template #treeNode let-data>
+            <li>
+                <button class="accordion-button d-flex justify-content-between"
+                    [ngClass]="{'collapse-hide' : data.isCollapsed == true, 'collapse-show' : data.isCollapsed == false, 'has-child' : (data.childList.length>0 && data.isCollapsed != true)}"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+
+                    <div class="icon-group-col ps-0" (click)="onToggle(data)">
+                        <span class="permission-type-icon" *ngIf="data.permissionType == 1"><i
+                                class="bx bx-link"></i></span>
+                        <span class="permission-type-icon" *ngIf="data.permissionType == 2"><i
+                                class="bx bx-dialpad"></i></span>
+                        <span class="permission-type-icon" *ngIf="data.permissionType == 3"><i
+                                class="bx bx-user"></i></span>
+
+                        <span>{{data.displayName}}</span>
+                    </div>
+                    <div *ngIf="!actionToMove" class="permission-data-col">
+                        <div class="float-end">
+                            <span class="me-1">{{data.permissionName}}</span>
+                            <span class="mx-1">{{data.displayName}}</span>
+                            <span class="mx-1">{{data.routePath}}</span>
+                            <span class="ms-1">{{data.isActive}}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="!actionToMove" class="acc-btn-group-col">
+                        <div class="float-end accordion-action-btn-group">
+                            <span (click)="addPermissionModal(data)" class="badge bg-primary ms-1"><i
+                                    class="bx bx-plus"></i>
+                            </span>
+                            <span (click)="editPermission(data)" class="badge bg-info ms-1"><i class="bx bx-edit"></i>
+                            </span>
+                            <span *ngIf="data.parentPermissionID" (click)="deletePermission(data)"
+                                class="badge bg-danger ms-1"><i class="bx bx-trash"></i>
+                            </span>
+                            <span *ngIf="data.parentPermissionID" (click)="movePermission(data, false)"
+                                class="badge bg-success ms-1"><i class="bx bx-move"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div *ngIf="actionToMove" class="acc-btn-group-col">
+                        <div class="float-end accordion-action-btn-group">
+                            <span (click)="movePermission(data, true)" class="badge bg-success ms-1"><i
+                                    class="fa fa-check"></i> Move Here
+                            </span>
+                        </div>
+                    </div>
+                </button>
+
+            </li>
+            <ng-container *ngIf="data.childList">
+                <ul *ngIf="!data.isCollapsed">
+                    <ng-container *ngFor="let child of data.childList" [ngTemplateOutlet]="treeNode"
+                        [ngTemplateOutletContext]="{ $implicit: child }">
+                    </ng-container>
+                </ul>
+            </ng-container>
+        </ng-template>
+    </div>
+
+
+</div>

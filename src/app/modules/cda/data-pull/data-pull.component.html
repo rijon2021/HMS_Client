@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <app-page-title title="Data Pulling"></app-page-title>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12 file-ref">
+            <div class="card mb-1">
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="fileRef" placeholder="Type File/Ref No">
+                        <button class="btn btn-danger input-group-button" title="pull data" (click)="pullByFileRef()"><i
+                                class="bx bx-export"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row" style="min-height: 50vh;">
+                        <pre>{{fileDetails ? (fileDetails|json) : 'Data not available'}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.file-ref {
+    flex: 0 0 auto;
+}
+
+@media only screen and (min-width: 990px) and (max-width: 1201px) {
+
+    .file-ref {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1500px) {
+
+    .file-ref {
+        width: 40%;
+    }
+}

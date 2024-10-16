@@ -1,0 +1,6 @@
+<button *ngIf="type=='btn'" type="button" class="{{class}}" (click)="onClick($event)"><i class="{{icon}}"></i>
+    {{label}}</button>
+
+<span *ngIf="type=='span'" class="{{class}}" (click)="onClick($event)"><i class="{{icon}}"></i> {{label}}</span>
+
+<input *ngIf="type=='chk'" type="checkbox" class="{{class}}" >
