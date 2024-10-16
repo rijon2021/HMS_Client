@@ -22,7 +22,6 @@ import { ButtonRendererComponent } from './modules/renderer/button-renderer/butt
 import { AppHttpInterceptor } from './core/errors/app-http.interceptor';
 import { CheckboxRendererComponent } from './modules/renderer/checkbox-renderer/checkbox-renderer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminDashboardService } from './core/services/cda/admin-dashboard.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
@@ -76,7 +75,6 @@ export function createTranslateLoader(http: HttpClient): any {
   bootstrap: [AppComponent],
   providers: [
     LocalStorageService,
-    AdminDashboardService,
     SweetAlertService,
     {
       provide: HTTP_INTERCEPTORS,

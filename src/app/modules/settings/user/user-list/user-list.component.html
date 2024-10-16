@@ -2,29 +2,7 @@
   <app-page-title title="User List"></app-page-title>
   <div class="card">
     <div class="card-body">
-      <div class="row mb-2">
-        <div class="col-md-12">
-            <div class="filter-row">
-                <div class="row mb-2">
-                    <div class="col-md-3">
-                        <div class="row">
-                            <label for="" class="col-md-4 control-label text-right">Department</label>
-                            <div class="col-md-8">
-                                <select id="userID" class="form-select" (change)="departmentChange()"
-                                    [(ngModel)]="filterDepartmentID">
-                                    <option [value]=0>All Department</option>
-                                    <option *ngFor="let item of lstDepartment"
-                                        [value]="item.departmentID">
-                                        {{item.departmentNameBangla}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+      
       <div class="row">
         <div class="col-md-10 my-1">
           <button (click)="addUser()" class="btn btn-success me-1"><i class="fa fa-plus"></i> Add New</button>

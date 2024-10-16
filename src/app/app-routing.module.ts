@@ -27,12 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule),
     canActivate: [AuthGuard]
   },
-  {
-    path: 'cda',
-    component: LayoutComponent,
-    loadChildren: () => import('./modules/cda/cda.module').then(m => m.CdaModule),
-    canActivate: [AuthGuard]
-  },
+ 
 ];
 
 @NgModule({

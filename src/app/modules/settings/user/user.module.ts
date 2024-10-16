@@ -9,7 +9,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { UserService } from 'src/app/core/services/settings/user.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCreateComponent } from './user-create/user-create.component';
-import { UserDpzMapComponent } from './user-dpz-map/user-dpz-map.component';
 import { UserDpzMapService } from 'src/app/core/services/settings/user-dpz-map.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
@@ -18,7 +17,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     declarations: [
         UserCreateComponent, 
         UserListComponent,
-        UserDpzMapComponent,
         ChangePasswordComponent
     ],
     imports: [

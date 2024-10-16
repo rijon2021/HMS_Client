@@ -34,21 +34,8 @@ import { UpazilaCityCorporationService } from 'src/app/core/services/settings/up
 import { ThanaService } from 'src/app/core/services/settings/thana.service';
 import { UnionWardService } from 'src/app/core/services/settings/union-ward.service';
 import { VillageAreaService } from 'src/app/core/services/settings/village-area.service';
-import { CountryComponent } from './administrative-unit/country/country.component';
 import { CountryService } from 'src/app/core/services/settings/country.service';
 import { ParaService } from 'src/app/core/services/settings/para.service';
-import { DistrictComponent } from './administrative-unit/district/district.component';
-import { DivisionComponent } from './administrative-unit/division/division.component';
-import { ParaComponent } from './administrative-unit/para/para.component';
-import { ThanaComponent } from './administrative-unit/thana/thana.component';
-import { UnionWardComponent } from './administrative-unit/union-ward/union-ward.component';
-import { UpazilaCityCorporationComponent } from './administrative-unit/upazila-city-corporation/upazila-city-corporation.component';
-import { VillageAreaComponent } from './administrative-unit/village-area/village-area.component';
-import { DepartmentsComponent } from './departments/departments.component';
-import { DesignationsComponent } from './designations/designations.component';
-import { MouzaComponent } from './administrative-unit/mouza/mouza.component';
-import { DpzComponent } from './administrative-unit/dpz/dpz.component';
-import { DepartmentDesignationMapComponent } from './department-designation-map/department-designation-map.component';
 import { DepartmentDesignationMapService } from 'src/app/core/services/settings/departmentDesignationMap.service';
 
 
@@ -65,19 +52,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NotificationAreaComponent,
     UserRoleComponent,
     PermissionRoleMapComponent,
-    CountryComponent,
-    DivisionComponent,
-    DistrictComponent,
-    ThanaComponent,
-    UpazilaCityCorporationComponent,
-    UnionWardComponent,
-    ParaComponent,
-    VillageAreaComponent,
-    DepartmentsComponent,
-    DesignationsComponent,
-    MouzaComponent,
-    DpzComponent,
-    DepartmentDesignationMapComponent,
   ],
   imports: [
     CommonModule,

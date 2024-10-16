@@ -19,7 +19,7 @@ export class UserListComponent implements OnInit {
   // bread crumb items
   lstUser: Users[] = new Array<Users>();
   lstUserAll: Users[] = new Array<Users>();
-  lstDepartment: Department[] = new Array<Department>();
+  // lstDepartment: Department[] = new Array<Department>();
   selectedUser: Users = new Users();
   public pageModel: PageModel;
 
@@ -50,7 +50,6 @@ export class UserListComponent implements OnInit {
     this.filterDepartmentID = 0;
     this.pageModel = new PageModel();
     this.getAll();
-    this.getAllDepartment();
   }
 
   getAll() {
@@ -74,16 +73,7 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  getAllDepartment() {
-    this.departmentService.getAll().subscribe(
-      (res) => {
-        if (res) {
-          this.lstDepartment = Object.assign(this.lstDepartment, res);
-          this.lstDepartment = [...this.lstDepartment];
-        }
-      }
-    );
-  }
+
 
   departmentChange() {
     this.lstUser = [];
@@ -165,7 +155,7 @@ const dataColumnDefs = [
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
   { isVisible: true, field: "userID", headerName: 'User ID', lockPosition: true, pinned: 'left', suppressMovable: false } as ColDef,
-  { isVisible: true, field: "departmentNameBangla", headerName: 'Department' } as ColDef,
+  // { isVisible: true, field: "departmentNameBangla", headerName: 'Department' } as ColDef,
   { isVisible: true, field: "userFullNameBangla", headerName: 'Full Name' } as ColDef,
   { isVisible: true, field: "designationNameBangla", headerName: 'Designation' } as ColDef,
   { isVisible: true, field: "mobileNo", headerName: 'Mobile No' } as ColDef,
