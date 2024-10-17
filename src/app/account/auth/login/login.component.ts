@@ -73,16 +73,6 @@ export class LoginComponent implements OnInit {
             if (tokenResult.access_token && tokenResult.statusCode == 200) {
               this.setLoginInformation(res);
 
-              let userRoleID = res.responseObj.userRoleID;
-              if (userRoleID == 38) {
-                this.returnUrl = 'cda/luc-atp-list';
-              } else if (userRoleID == 39) {
-                this.returnUrl = 'cda/bc-case-inspection';
-              } else if (userRoleID == 40) {
-                this.returnUrl = 'cda/sp-case';
-              }else{
-                this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-              }
               // this.returnUrl = res.responseObj.permissions[1].routePath;
               RoutingHelper.navigate2([], [this.returnUrl], this.router);
             }
