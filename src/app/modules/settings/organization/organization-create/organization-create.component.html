@@ -168,7 +168,7 @@
                             <div class="mb-3 row">
                                 <div class="col-md-5">
                                     <div class="text-end">
-                                        <button *ngIf="!objOrganization.organizationID" type="button"
+                                        <button *ngIf="!objOrganization.organizationID && createOrganizationButton.length==1" type="button"
                                             class="btn btn-success m-1" (click)="saveOrganization()"><i
                                                 class="fa fa-save"></i>
                                             Save
