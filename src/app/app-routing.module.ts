@@ -27,6 +27,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'hostel-settings',
+    component: LayoutComponent,
+    loadChildren: () => import('./modules/hms/hostel-settings/hostel-settings.module').then(m => m.HostelSettingsModule),
+    canActivate: [AuthGuard]
+  },
  
 ];
 

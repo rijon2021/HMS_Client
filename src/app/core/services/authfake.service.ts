@@ -24,6 +24,10 @@ export class AuthfakeauthenticationService {
         let url = 'Authenticate/authenticate';
         return this.httpClientService.postJson(url, obj);
     }
+    loginNew(obj: any): Observable<any> {
+        let url = 'Authenticate/login';
+        return this.httpClientService.postJson(url, obj);
+    }
 
     logout() {
         // remove user from local storage to log user out
