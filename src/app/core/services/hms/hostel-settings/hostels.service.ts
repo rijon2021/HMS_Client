@@ -1,32 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from 'src/app/core/services/http-client.service';
+// import { HttpClientService } from 'src/app/core/services/http-client.service';
+import { HttpCommunicationService } from '../../http-communication.service';
 
 @Injectable()
 export class HostelsService {
   private controllerName = 'hostel';
   constructor(
-    private httpClientService: HttpClientService
+    private httpCommunicationService: HttpCommunicationService
   ) { }
 
   getAll() {
     let url = this.controllerName;
-    return this.httpClientService.get(url);
+    return this.httpCommunicationService.get(url);
   }
   getByID(userAutoID: number) {
     let url = this.controllerName + '/getByID/' + userAutoID;
-    return this.httpClientService.get(url);
+    return this.httpCommunicationService.get(url);
   }
   save(obj) {
     let url = this.controllerName
-    return this.httpClientService.postJson(url, obj);
+    return this.httpCommunicationService.postJson(url, obj);
   }
   update(obj) {
-    let url = this.controllerName
-    return this.httpClientService.postJson(url, obj);
+    let url = this.controllerName+'/'+obj.hostelId;
+    return this.httpCommunicationService.putJson(url, obj);
   }
   deleteByID(userAutoID: number) {
     let url = this.controllerName + '?id=' + userAutoID;
-    return this.httpClientService.delete(url);
+    return this.httpCommunicationService.delete(url);
   }
   
 }
