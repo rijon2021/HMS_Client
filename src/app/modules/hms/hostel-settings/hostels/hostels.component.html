@@ -2,21 +2,21 @@
 
 <ng-template #modalHostels let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Recruit Year Information</h4>
+    <h4 class="modal-title" id="modal-basic-title">Hostel Information</h4>
   </div>
   <div class="modal-body">
     
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Hostel Name <span class="required">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Hostel Name <span class="required-star">*</span> </label>
         <div class="col-md-7">
-          <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.HostelName">
+          <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.hostelName">
         </div>
       </div>
     </div>
-    <!-- <div class="col-md-12">
+    <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Contact Number<span class="required">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Contact Number<span class="required-star">*</span> </label>
         <div class="col-md-7">
           <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.contactNumber">
         </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Hostel Email <span class="required">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Hostel Email <span class="required-star">*</span> </label>
         <div class="col-md-7">
           <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.email">
         </div>
@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Description <span class="required">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Description <span class="required-star">*</span> </label>
         <div class="col-md-7">
           <textarea id="name" class="form-control" type="text" [(ngModel)]="objHostels.description"></textarea>
         </div>
@@ -40,7 +40,7 @@
     </div>
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Address <span class="required">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Address <span class="required-star">*</span> </label>
         <div class="col-md-7">
           <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.address">
         </div>
@@ -48,26 +48,26 @@
     </div>
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Established Date <span class="required">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Established Date <span class="required-star">*</span> </label>
         <div class="col-md-7">
           <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.establishedDate">
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fas fa-times"></i>
       Close</button>
-    <button type="button" *ngIf="!objHostels.hostelId" class="btn btn-success" (click)="save()" [disabled]="!(objHostels.HostelName)"><i class="fas fa-save"></i>
+    <button type="button" *ngIf="!objHostels.hostelId" class="btn btn-success" (click)="save()" [disabled]="!(objHostels.hostelName)"><i class="fas fa-save"></i>
       Save</button>
-    <button type="button" *ngIf="objHostels.hostelId>0"  class="btn btn-success" (click)="update()" [disabled]="!(objHostels.HostelName)"><i class="fas fa-save"></i>
+    <button type="button" *ngIf="objHostels.hostelId>0"  class="btn btn-success" (click)="update()" [disabled]="!(objHostels.hostelName)"><i class="fas fa-save"></i>
       Update</button>
   </div>
 </ng-template>
 <!-- ==========Country Add Modal======== -->
 
 <div class="container-fluid">
-  <app-page-title title="Recruit Year "></app-page-title>
+  <app-page-title title="Hostel List"></app-page-title>
   <div class="row">
     <div class="col-md-10 my-1">
       <button (click)="add()" class="btn btn-success me-1"><i class="fa fa-plus"></i> Add New</button>

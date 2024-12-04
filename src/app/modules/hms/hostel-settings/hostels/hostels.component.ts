@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -101,14 +102,17 @@ export class HostelsComponent implements OnInit {
 
   async update() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.hostelsService.update(this.objHostels).subscribe(
-        (res: ResponseMessage) => {
-          if (res.statusCode === ReturnStatus.Success) { 
-              this.swal.message("Data Updated Successfully", SweetAlertEnum.success);
+      this.hostelsService.update(this.objHostels).subscribe( 
+        (response:HttpResponse<any>) => {
+          if (response) { 
+            console.log('Status Code:', response.status); // Server response code
+            console.log('Body:', response.body);    
+            console.log('Body:', response);    
+              this.swal.message("Success"+response, SweetAlertEnum.success);
               this.modalClose();
               this.getAll(); 
           } else {
-            this.swal.message(res.message, SweetAlertEnum.error)
+            this.swal.message('Not Success', SweetAlertEnum.error)
             this.modalClose();
           }
       },
@@ -182,4 +186,10 @@ const dataColumnDefs = [
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
   { isVisible: true, field: "hostelName", headerName: 'Hostel Name' } as ColDef,
+  { isVisible: true, field: "contactNumber", headerName: 'Contact No' } as ColDef,
+  { isVisible: true, field: "email", headerName: 'Email' } as ColDef,
+  { isVisible: true, field: "description", headerName: 'Description' } as ColDef,
+  { isVisible: true, field: "establishedDate", headerName: 'Esteblish Date' } as ColDef,
+  { isVisible: true, field: "website", headerName: 'Website' } as ColDef,
+  { isVisible: true, field: "address", headerName: 'Address' } as ColDef,
 ];

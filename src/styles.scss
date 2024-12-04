@@ -27,7 +27,9 @@
     -o-transform: scale(1);
   }
 }
-
+.required-star{
+  color: #ff0000;
+}
 .carousel-item {
   transition: opacity 0.7s ease !important;
   position: absolute !important;

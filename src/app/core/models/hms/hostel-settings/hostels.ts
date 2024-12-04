@@ -1,6 +1,6 @@
 export class Hostels {
     hostelId: number;
-    HostelName: string;
+    hostelName: string;
     address: string;
     contactNumber: string;
     email: string;
@@ -8,6 +8,5 @@ export class Hostels {
     totalBranches: number;
     establishedDate: string;
     description: string;
-    amenities: string[];
     hostelManager: string;
 }
