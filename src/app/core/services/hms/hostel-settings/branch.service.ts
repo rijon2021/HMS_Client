@@ -4,8 +4,8 @@ import { HttpCommunicationService } from '../../http-communication.service';
 
 
 @Injectable({ providedIn: "root" })
-export class HostelsService {
-  private controllerName = 'hostel';
+export class BranchService {
+  private controllerName = 'branch';
   constructor(
     private httpCommunicationService: HttpCommunicationService
   ) { }

@@ -4,5 +4,9 @@ export class ResponseMessage {
   message: string;
   statusCode: number;
   length: boolean;
+  headers: any;
+  body: any;
+  status: any;
+  type: any;
   // token: string;
 }

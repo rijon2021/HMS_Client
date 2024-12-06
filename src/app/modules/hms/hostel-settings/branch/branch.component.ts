@@ -7,20 +7,20 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { HttpReturnStatus } from 'src/app/core/enums/globalEnum';
 import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-alert.service';
 import { PageModel } from 'src/app/core/models/core/pageModel';
-import { Hostels } from 'src/app/core/models/hms/hostel-settings/hostels';
-import { HostelsService } from 'src/app/core/services/hms/hostel-settings/hostels.service';
+import { Branch } from 'src/app/core/models/hms/hostel-settings/branch';
+import { BranchService } from 'src/app/core/services/hms/hostel-settings/branch.service';
 @Component({
-  selector: 'app-hostels',
-  templateUrl: './hostels.component.html',
-  styleUrls: ['./hostels.component.css'],
+  selector: 'app-branch',
+  templateUrl: './branch.component.html',
+  styleUrls: ['./branch.component.scss']
 })
-export class HostelsComponent implements OnInit {
+export class BranchComponent implements OnInit {
 
-  @ViewChild("modalHostels") modalHostels: TemplateRef<any>;
+  @ViewChild("modalBranch") modalBranch: TemplateRef<any>;
 
-  lstHostels: Hostels[] = new Array<Hostels>();
-  objHostels: Hostels = new Hostels();
-  selectedHostels: Hostels = new Hostels();
+  lstBranch: Branch[] = new Array<Branch>();
+  objBranch: Branch = new Branch();
+  selectedBranch: Branch = new Branch();
   public pageModel: PageModel;
 
   private gridApi;
@@ -39,7 +39,7 @@ export class HostelsComponent implements OnInit {
 
 
   constructor(
-    private hostelsService: HostelsService,
+    private branchService: BranchService,
     private swal: SweetAlertService,
     private router: Router,
     private modalService: NgbModal,
@@ -48,16 +48,14 @@ export class HostelsComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    // this.objHostels.establishedDateStr = this.datePipe.transform(this.objHostels.establishedDate, 'dd-MM-yyyy HH:mm:ss', '+0600');
-    // this.objHostels.establishedDateStr = new Date(this.objHostels.establishedDateStr).toString().split(' ')[0];
   }
 
   getAll() {
-    this.lstHostels = [];
-    this.hostelsService.getAll().subscribe((response) => {
+    this.lstBranch = [];
+    this.branchService.getAll().subscribe((response) => {
       if (response) {
-        this.lstHostels = Object.assign(this.lstHostels, response);
-        this.lstHostels = [...this.lstHostels];
+        this.lstBranch = Object.assign(this.lstBranch, response);
+        this.lstBranch = [...this.lstBranch];
         this.gridOptions.api.redrawRows();
       }
     }
@@ -65,24 +63,21 @@ export class HostelsComponent implements OnInit {
   }
 
   add() {
-    this.objHostels = new Hostels();
+    this.objBranch = new Branch();
     this.gridApi.deselectAll();
-    this.modalService.open(this.modalHostels, { size: 'md', backdrop: 'static' });
+    this.modalService.open(this.modalBranch, { size: 'md', backdrop: 'static' });
   }
 
   modalClose() {
-    this.modalService.dismissAll(this.modalHostels);
+    this.modalService.dismissAll(this.modalBranch);
     this.gridApi.deselectAll();
   }
 
   async save() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.objHostels.establishedDate = new Date(this.objHostels.establishedDateStr);
-      this.hostelsService.save(this.objHostels).subscribe(
+      this.branchService.save(this.objBranch).subscribe(
         (response: HttpResponse<any>) => {
         if (response.status == HttpReturnStatus.Success) { 
-        // (response) => {
-        //   if (response) {
             this.modalClose();
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
@@ -99,23 +94,15 @@ export class HostelsComponent implements OnInit {
   }
 
   edit() {
-    this.objHostels = this.selectedHostels;
-    // this.objHostels.establishedDateStr = new Date(this.objHostels.establishedDate).toISOString().split('T')[0];
-    // this.objHostels.establishedDateStr = this.datePipe.transform(this.objHostels.establishedDate, 'dd-MM-yyyy HH:mm:ss', '+0600');
-    let uttcDate = this.datePipe.transform(this.objHostels.establishedDate, 'yyyy-MM-dd HH:mm:ss', '+0600')
-    this.objHostels.establishedDateStr = uttcDate.toString().split(' ')[0];
-    // this.objHostels.establishedDateStr = new Date(this.datePipe.transform(this.objHostels.establishedDate, 'dd-MM-yyyy HH:mm:ss', '+0600')).toISOString().split(' ')[0];
-    this.modalService.open(this.modalHostels, { size: 'md' });
+    this.objBranch = this.selectedBranch;
+    this.modalService.open(this.modalBranch, { size: 'md' });
   }
 
   async update() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.objHostels.establishedDate = new Date(this.objHostels.establishedDateStr);
-      this.hostelsService.update(this.objHostels).subscribe(
+      this.branchService.update(this.objBranch).subscribe(
         (response: HttpResponse<any>) => {
         if (response.status == HttpReturnStatus.Success) { 
-        // (response) => {
-        //   if (response) {
             this.modalClose();
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
@@ -133,7 +120,7 @@ export class HostelsComponent implements OnInit {
 
   async deleteData() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.hostelsService.deleteByID(this.selectedHostels.hostelId).subscribe(
+      this.branchService.deleteByID(this.selectedBranch.branchId).subscribe(
         (response: HttpResponse<any>) => {
           if (response.status == HttpReturnStatus.Success) { 
             this.swal.message(response.body.message, SweetAlertEnum.success);
@@ -162,10 +149,10 @@ export class HostelsComponent implements OnInit {
   onSelect() {
     const selectedRows = this.gridApi.getSelectedRows();
     if (selectedRows && selectedRows.length == 1) {
-      this.selectedHostels = selectedRows[0];
+      this.selectedBranch = selectedRows[0];
     }
     else {
-      this.selectedHostels = new Hostels();
+      this.selectedBranch = new Branch();
     }
   }
 
@@ -195,21 +182,5 @@ const dataColumnDefs = [
     isVisible: true, field: 'slNo', headerName: 'SL', lockPosition: true, pinned: 'left',
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "hostelName", headerName: 'Hostel Name' } as ColDef,
-  { isVisible: true, field: "contactNumber", headerName: 'Contact No' } as ColDef,
-  { isVisible: true, field: "email", headerName: 'Email' } as ColDef,
-  { isVisible: true, field: "description", headerName: 'Description' } as ColDef,
-  {
-    isVisible: true, field: "establishedDate",
-    valueFormatter: (params) => {
-      const date = new Date(params.value);
-      const datePipe = new DatePipe('en-US');
-      const cDate = datePipe.transform(params.value, 'dd-MM-yyyy HH:mm:ss', '+0600');
-      return cDate.toString().split(' ')[0];
-    }, headerName: 'Esteblish Date'
-  } as ColDef,
-  { isVisible: true, field: "website", headerName: 'Website' } as ColDef,
-  { isVisible: true, field: "address", headerName: 'Address' } as ColDef,
-  { isVisible: true, field: "totalBranches", headerName: 'Total Branches' } as ColDef,
-  { isVisible: true, field: "hostelManager", headerName: 'Hostel Manager' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "branchName", headerName: 'Branch Name' } as ColDef,
 ];

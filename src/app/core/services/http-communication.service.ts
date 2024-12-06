@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 // import { RequestMessage } from '../models/requestMessage';
 
 
@@ -15,13 +16,13 @@ export class HttpCommunicationService {
     this.BASE_URL = environment.baseUrl;
   }
 
-  get(url: string) {
+  get(url: string){
     return this.http.get(this.BASE_URL + url);
   }
 
-  postJson(url: string, data: any) {
+  postJson(url: string, data: any): Observable<HttpResponse<any>>  {
     // this.requestMessage.RequestObj = data;
-    return this.http.post(this.BASE_URL + url, data);
+    return this.http.post(this.BASE_URL + url, data, { observe: 'response' });
   }
 
   postForm(url: string, data: any) {
@@ -32,13 +33,13 @@ export class HttpCommunicationService {
     });
   }
 
-  putJson(url: string, data: any) {
+  putJson(url: string, data: any): Observable<HttpResponse<any>>  {
     // this.requestMessage.RequestObj = data;
-    return this.http.put(this.BASE_URL + url, data);
+    return this.http.put(this.BASE_URL + url, data, { observe: 'response' });
   }
 
-  delete(url: string) {
-    return this.http.delete(this.BASE_URL + url);
+  delete(url: string): Observable<HttpResponse<any>>  {
+    return this.http.delete(this.BASE_URL + url, { observe: 'response' });
   }
 
 }

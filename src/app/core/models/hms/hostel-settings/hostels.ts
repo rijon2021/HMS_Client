@@ -6,7 +6,8 @@ export class Hostels {
     email: string;
     website: string;
     totalBranches: number;
-    establishedDate: string;
+    establishedDate: Date;
+    establishedDateStr: string;
     description: string;
     hostelManager: string;
 }

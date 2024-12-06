@@ -11,6 +11,14 @@ export enum ReturnStatus {
     Duplicate = 2,
     PendingOTPAuthentication = 3,
 }
+export enum HttpReturnStatus {
+    Success = 200,
+    Failed = -1,
+    Duplicate = 2,
+    notFound = 401,
+    unAuthorized = 401,
+    PendingOTPAuthentication = 3,
+}
 
 export enum PermissionType {
     Menu = 1,

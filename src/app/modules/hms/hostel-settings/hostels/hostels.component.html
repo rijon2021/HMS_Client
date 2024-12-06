@@ -2,7 +2,7 @@
 
 <ng-template #modalHostels let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Hostel Information</h4>
+    <h4 class="modal-title" id="modal-basic-title">Add New Hostel</h4>
   </div>
   <div class="modal-body">
     
@@ -32,9 +32,33 @@
     </div>
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Description <span class="required-star">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Hostel Website <span class="required-star">*</span> </label>
         <div class="col-md-7">
-          <textarea id="name" class="form-control" type="text" [(ngModel)]="objHostels.description"></textarea>
+          <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.website">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="name" class="col-md-5 col-form-label">Total Branches <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.totalBranches">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="name" class="col-md-5 col-form-label">Hostel Manager <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.hostelManager">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="name" class="col-md-5 col-form-label">Established Date <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <input id="name" class="form-control" type="date" [(ngModel)]="objHostels.establishedDateStr">
         </div>
       </div>
     </div>
@@ -48,9 +72,9 @@
     </div>
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-5 col-form-label">Established Date <span class="required-star">*</span> </label>
+        <label for="name" class="col-md-5 col-form-label">Description <span class="required-star">*</span> </label>
         <div class="col-md-7">
-          <input id="name" class="form-control" type="text" [(ngModel)]="objHostels.establishedDate">
+          <textarea id="name" class="form-control" type="text" [(ngModel)]="objHostels.description"></textarea>
         </div>
       </div>
     </div>

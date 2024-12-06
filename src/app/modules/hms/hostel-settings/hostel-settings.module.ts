@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbNavModule, NgbDropdownModule, NgbModalModule, NgbTooltipModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +20,9 @@ import { HostelsComponent } from './hostels/hostels.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { HostelsService } from 'src/app/core/services/hms/hostel-settings/hostels.service';
 import { HostelSettingsRoutingModule } from './hostel-settings-routing.module';
+import { BranchComponent } from './branch/branch.component';
+import { RoomComponent } from './room/room.component';
+import { BedComponent } from './bed/bed.component';
 
 
 // register FullCalendar plugins
@@ -32,6 +35,9 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   declarations: [
     HostelsComponent,
+    BranchComponent,
+    RoomComponent,
+    BedComponent,
   ],
   imports: [
     CommonModule,
@@ -59,6 +65,7 @@ FullCalendarModule.registerPlugins([
   ],
   providers: [
     HostelsService,
+    DatePipe
   ]
 })
 export class HostelSettingsModule { }
