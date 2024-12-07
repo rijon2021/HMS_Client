@@ -4,11 +4,16 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColDef, GridOptions } from 'ag-grid-community';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { HttpReturnStatus } from 'src/app/core/enums/globalEnum';
 import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-alert.service';
 import { PageModel } from 'src/app/core/models/core/pageModel';
+import { Aminities } from 'src/app/core/models/hms/hostel-settings/aminities';
 import { Branch } from 'src/app/core/models/hms/hostel-settings/branch';
+import { Hostels } from 'src/app/core/models/hms/hostel-settings/hostels';
 import { BranchService } from 'src/app/core/services/hms/hostel-settings/branch.service';
+import { HostelsService } from 'src/app/core/services/hms/hostel-settings/hostels.service';
+
 @Component({
   selector: 'app-branch',
   templateUrl: './branch.component.html',
@@ -18,10 +23,35 @@ export class BranchComponent implements OnInit {
 
   @ViewChild("modalBranch") modalBranch: TemplateRef<any>;
 
+
+
   lstBranch: Branch[] = new Array<Branch>();
+  lstHostels: Hostels[] = new Array<Hostels>();
   objBranch: Branch = new Branch();
   selectedBranch: Branch = new Branch();
   public pageModel: PageModel;
+
+  //===============ng multidropdown
+
+  lstAminities: Aminities[] = new Array<Aminities>();
+  selectedAminities: Aminities[] = new Array<Aminities>();
+  dropdownSettings: IDropdownSettings = {};
+
+  AlldropdownSettings() {
+    this.dropdownSettings = {
+      singleSelection: false,
+      // defaultOpen: false,
+      idField: "aminitiesId",
+      textField: "aminitiesName",
+      selectAllText: "Select All",
+      unSelectAllText: "UnSelect All",
+      itemsShowLimit: 3
+    };
+
+    
+  }
+
+  //===============End ng multidropdown
 
   private gridApi;
   private gridColumnApi;
@@ -40,6 +70,7 @@ export class BranchComponent implements OnInit {
 
   constructor(
     private branchService: BranchService,
+    private hostelsService: HostelsService,
     private swal: SweetAlertService,
     private router: Router,
     private modalService: NgbModal,
@@ -48,7 +79,17 @@ export class BranchComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
+    this.getAllHostel();
+    this.AlldropdownSettings();
+    this.lstAminities = [
+      { aminitiesId: 1, aminitiesName: "Wifi" },
+      { aminitiesId: 2, aminitiesName: "Games" },
+      { aminitiesId: 3, aminitiesName: "Gym" },
+      { aminitiesId: 4, aminitiesName: "Wishing Machine" },
+    ];
+
   }
+
 
   getAll() {
     this.lstBranch = [];
@@ -61,6 +102,33 @@ export class BranchComponent implements OnInit {
     }
     );
   }
+
+  getAllHostel() {
+    this.lstHostels = [];
+    this.hostelsService.getAll().subscribe((response) => {
+      if (response) {
+        this.lstHostels = Object.assign(this.lstHostels, response);
+        this.lstHostels = [...this.lstHostels];
+        this.gridOptions.api.redrawRows();
+      }
+    }
+    );
+  }
+
+  //==========================Multiselect 
+  onItemSelect(item: any) {
+    console.log('onItemSelect', item);
+  }
+  onItemDeSelect(item: any) {
+    console.log('onItem DeSelect', item);
+  }
+
+  onSelectAll(items: any) {
+    console.log('onSelectAll', items);
+  }
+
+
+  //==========================Multiselect 
 
   add() {
     this.objBranch = new Branch();
@@ -77,7 +145,7 @@ export class BranchComponent implements OnInit {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
       this.branchService.save(this.objBranch).subscribe(
         (response: HttpResponse<any>) => {
-        if (response.status == HttpReturnStatus.Success) { 
+          if (response.status == HttpReturnStatus.Success) {
             this.modalClose();
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
@@ -102,7 +170,7 @@ export class BranchComponent implements OnInit {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
       this.branchService.update(this.objBranch).subscribe(
         (response: HttpResponse<any>) => {
-        if (response.status == HttpReturnStatus.Success) { 
+          if (response.status == HttpReturnStatus.Success) {
             this.modalClose();
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
@@ -122,10 +190,10 @@ export class BranchComponent implements OnInit {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
       this.branchService.deleteByID(this.selectedBranch.branchId).subscribe(
         (response: HttpResponse<any>) => {
-          if (response.status == HttpReturnStatus.Success) { 
+          if (response.status == HttpReturnStatus.Success) {
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
-          }else{
+          } else {
             this.swal.message(response.body.message, SweetAlertEnum.error);
           }
         },
@@ -182,5 +250,11 @@ const dataColumnDefs = [
     isVisible: true, field: 'slNo', headerName: 'SL', lockPosition: true, pinned: 'left',
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "hostelId", headerName: 'Hostel Name' } as ColDef,
   { isVisible: true, lockPosition: true, pinned: 'left', field: "branchName", headerName: 'Branch Name' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "branchCode", headerName: 'Branch Code' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "location", headerName: 'Branch Location' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "contactNumber", headerName: 'Contact Number' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "email", headerName: 'Branch Email' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "amenities", headerName: 'Amenities' } as ColDef,
 ];

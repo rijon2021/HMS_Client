@@ -23,6 +23,10 @@ import { HostelSettingsRoutingModule } from './hostel-settings-routing.module';
 import { BranchComponent } from './branch/branch.component';
 import { RoomComponent } from './room/room.component';
 import { BedComponent } from './bed/bed.component';
+import { BranchService } from 'src/app/core/services/hms/hostel-settings/branch.service';
+import { RoomService } from 'src/app/core/services/hms/hostel-settings/room.service';
+import { BedService } from 'src/app/core/services/hms/hostel-settings/bed.service';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 // register FullCalendar plugins
@@ -57,6 +61,7 @@ FullCalendarModule.registerPlugins([
     UIModule,
     Ng2SmartTableModule,
     AgGridModule,
+    NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({
       // apiKey: 'AIzaSyBiols4lFvOc7_rGeOZVI6l-YE617w7xR0',
       apiKey: environment.MAP_API_KEY,
@@ -65,6 +70,9 @@ FullCalendarModule.registerPlugins([
   ],
   providers: [
     HostelsService,
+    BranchService,
+    RoomService,
+    BedService,
     DatePipe
   ]
 })

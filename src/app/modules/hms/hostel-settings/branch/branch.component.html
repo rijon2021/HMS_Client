@@ -7,6 +7,18 @@
   <div class="modal-body">
     <div class="col-md-12">
       <div class="mb-2 row">
+        <label for="name" class="col-md-5 col-form-label">Hostel <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <select required [(ngModel)]="objBranch.hostelId" name="globalSessionsID" class="form-control">
+            <option *ngFor="let hostel of lstHostels" [value]="hostel.hostelId">
+              {{hostel.hostelName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
         <label for="name" class="col-md-5 col-form-label">Branch Name <span class="required-star">*</span> </label>
         <div class="col-md-7">
           <input id="name" class="form-control" type="text" [(ngModel)]="objBranch.branchName">
@@ -33,7 +45,7 @@
       <div class="mb-2 row">
         <label for="name" class="col-md-5 col-form-label">Branch Email <span class="required-star">*</span> </label>
         <div class="col-md-7">
-          <input id="name" class="form-control" type="text" [(ngModel)]="objBranch.email">
+          <input id="name" class="form-control" type="email" [(ngModel)]="objBranch.email">
         </div>
       </div>
     </div>
@@ -45,14 +57,32 @@
         </div>
       </div>
     </div>
-    
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="name" class="col-md-5 col-form-label">Amenities <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <!-- <ng-multiselect-dropdown [(ngModel)]="objBranch.amenities" [placeholder]="'Select Aminities'"
+            [data]="lstAminities" [settings]="dropdownSettings" (onDropDownClose)="onDropDownClose()"
+            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown> -->
+
+          <ng-multiselect-dropdown [placeholder]="'Select Aminities'" [settings]="dropdownSettings"
+            [data]="lstAminities" [(ngModel)]="selectedAminities" (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fas fa-times"></i>
       Close</button>
-    <button type="button" *ngIf="!objBranch.branchId" class="btn btn-success" (click)="save()" [disabled]="!(objBranch.branchName)"><i class="fas fa-save"></i>
+    <button type="button" *ngIf="!objBranch.branchId" class="btn btn-success" (click)="save()"
+      [disabled]="!(objBranch.branchName)"><i class="fas fa-save"></i>
       Save</button>
-    <button type="button" *ngIf="objBranch.branchId>0"  class="btn btn-success" (click)="update()" [disabled]="!(objBranch.branchName)"><i class="fas fa-save"></i>
+    <button type="button" *ngIf="objBranch.branchId>0" class="btn btn-success" (click)="update()"
+      [disabled]="!(objBranch.branchName)"><i class="fas fa-save"></i>
       Update</button>
   </div>
 </ng-template>

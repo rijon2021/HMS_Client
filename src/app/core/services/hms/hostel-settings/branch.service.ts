@@ -5,7 +5,7 @@ import { HttpCommunicationService } from '../../http-communication.service';
 
 @Injectable({ providedIn: "root" })
 export class BranchService {
-  private controllerName = 'branch';
+  private controllerName = 'Branch';
   constructor(
     private httpCommunicationService: HttpCommunicationService
   ) { }
@@ -23,7 +23,7 @@ export class BranchService {
     return this.httpCommunicationService.postJson(url, obj);
   }
   update(obj) {
-    let url = this.controllerName+'/'+obj.hostelId;
+    let url = this.controllerName+'/'+obj.branchId;
     return this.httpCommunicationService.putJson(url, obj);
   }
   deleteByID(userAutoID: number) {
