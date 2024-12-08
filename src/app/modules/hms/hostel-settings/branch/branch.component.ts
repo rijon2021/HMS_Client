@@ -45,7 +45,8 @@ export class BranchComponent implements OnInit {
       textField: "aminitiesName",
       selectAllText: "Select All",
       unSelectAllText: "UnSelect All",
-      itemsShowLimit: 3
+      itemsShowLimit: 100,
+      allowSearchFilter: true,
     };
 
     
@@ -116,15 +117,25 @@ export class BranchComponent implements OnInit {
   }
 
   //==========================Multiselect 
+  branchAminities(items:any){
+    this.objBranch.amenities = items;
+  }
   onItemSelect(item: any) {
-    console.log('onItemSelect', item);
+    console.log('All items selected:', item);
+    console.log('SA:', this.selectedAminities);
   }
   onItemDeSelect(item: any) {
-    console.log('onItem DeSelect', item);
+    console.log('All items selected:', item);
+    console.log('SA:', this.selectedAminities);
   }
 
   onSelectAll(items: any) {
-    console.log('onSelectAll', items);
+    console.log('All items selected:', items);
+    console.log('SA:', this.selectedAminities);
+  }
+  onDeSelectAll(items: any) {
+    console.log('All items selected:', items);
+    console.log('SA:', this.selectedAminities);
   }
 
 
@@ -143,6 +154,7 @@ export class BranchComponent implements OnInit {
 
   async save() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
+      // this.objBranch.amenities = this.selectedAminities;
       this.branchService.save(this.objBranch).subscribe(
         (response: HttpResponse<any>) => {
           if (response.status == HttpReturnStatus.Success) {
@@ -168,6 +180,7 @@ export class BranchComponent implements OnInit {
 
   async update() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
+      // this.objBranch.amenities = this.selectedAminities;
       this.branchService.update(this.objBranch).subscribe(
         (response: HttpResponse<any>) => {
           if (response.status == HttpReturnStatus.Success) {

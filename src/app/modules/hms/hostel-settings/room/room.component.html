@@ -7,9 +7,41 @@
   <div class="modal-body">
     <div class="col-md-12">
       <div class="mb-2 row">
+        <label for="branchId" class="col-md-5 col-form-label">Branch <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <select [(ngModel)]="objRoom.branchId" name="branchId" class="form-select select-control">
+            <option *ngFor="let cat of lstBranch" [value]="cat.branchId">
+              {{cat.branchName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="roomCategoryId" class="col-md-5 col-form-label">Room Category <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <select [(ngModel)]="objRoom.roomCategoryId" name="roomCategoryId" class="form-select select-control">
+            <option *ngFor="let cat of lstRoomCategory" [value]="cat.roomCategoryId">
+              {{cat.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
         <label for="name" class="col-md-5 col-form-label">Room Name <span class="required-star">*</span> </label>
         <div class="col-md-7">
           <input id="name" class="form-control" type="text" [(ngModel)]="objRoom.roomNumber">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="BedCapacity" class="col-md-5 col-form-label">Bed Capacity <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <input id="BedCapacity" class="form-control" type="text" [(ngModel)]="objRoom.capacity">
         </div>
       </div>
     </div>

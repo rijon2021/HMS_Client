@@ -5,7 +5,7 @@ export class Branch {
     location: string;
     contactNumber: string;
     email: string;
-    amenities: string[];
+    amenities: any[];
     hostelId: number;
     // hostel: Hostel;
     // rooms: Room[];

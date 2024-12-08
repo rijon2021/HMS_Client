@@ -5,7 +5,7 @@ import { HttpCommunicationService } from '../../http-communication.service';
 
 @Injectable({ providedIn: "root" })
 export class RoomService {
-  private controllerName = 'room';
+  private controllerName = 'Room';
   constructor(
     private httpCommunicationService: HttpCommunicationService
   ) { }
@@ -14,8 +14,8 @@ export class RoomService {
     let url = this.controllerName;
     return this.httpCommunicationService.get(url);
   }
-  getByID(userAutoID: number) {
-    let url = this.controllerName + '/getByID/' + userAutoID;
+  getByID(Id: number) {
+    let url = this.controllerName + '/getByID/' + Id;
     return this.httpCommunicationService.get(url);
   }
   save(obj) {
@@ -23,11 +23,11 @@ export class RoomService {
     return this.httpCommunicationService.postJson(url, obj);
   }
   update(obj) {
-    let url = this.controllerName+'/'+obj.hostelId;
+    let url = this.controllerName+'/'+obj.roomId;
     return this.httpCommunicationService.putJson(url, obj);
   }
-  deleteByID(userAutoID: number) {
-    let url = this.controllerName + '/' + userAutoID;
+  deleteByID(Id: number) {
+    let url = this.controllerName + '/' + Id;
     return this.httpCommunicationService.delete(url);
   }
   

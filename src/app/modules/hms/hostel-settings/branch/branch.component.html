@@ -9,7 +9,7 @@
       <div class="mb-2 row">
         <label for="name" class="col-md-5 col-form-label">Hostel <span class="required-star">*</span> </label>
         <div class="col-md-7">
-          <select required [(ngModel)]="objBranch.hostelId" name="globalSessionsID" class="form-control">
+          <select required [(ngModel)]="objBranch.hostelId" name="globalSessionsID" class="form-select form-control">
             <option *ngFor="let hostel of lstHostels" [value]="hostel.hostelId">
               {{hostel.hostelName}}
             </option>
@@ -68,7 +68,7 @@
 
           <ng-multiselect-dropdown [placeholder]="'Select Aminities'" [settings]="dropdownSettings"
             [data]="lstAminities" [(ngModel)]="selectedAminities" (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)">
+            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
           </ng-multiselect-dropdown>
         </div>
       </div>

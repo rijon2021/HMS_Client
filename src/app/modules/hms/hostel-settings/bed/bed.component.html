@@ -7,6 +7,18 @@
   <div class="modal-body">
     <div class="col-md-12">
       <div class="mb-2 row">
+        <label for="roomId" class="col-md-5 col-form-label">Room <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <select [(ngModel)]="objBed.roomId" name="roomId" class="form-select select-control">
+            <option *ngFor="let room of lstRoom" [value]="room.roomId">
+              {{room.roomNumber}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
         <label for="name" class="col-md-5 col-form-label">Bed Name <span class="required-star">*</span> </label>
         <div class="col-md-7">
           <input id="name" class="form-control" type="text" [(ngModel)]="objBed.bedNumber">

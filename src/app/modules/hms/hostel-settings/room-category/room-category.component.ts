@@ -7,26 +7,21 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { HttpReturnStatus } from 'src/app/core/enums/globalEnum';
 import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-alert.service';
 import { PageModel } from 'src/app/core/models/core/pageModel';
-import { Branch } from 'src/app/core/models/hms/hostel-settings/branch';
-import { Room } from 'src/app/core/models/hms/hostel-settings/room';
 import { RoomCategory } from 'src/app/core/models/hms/hostel-settings/roomCategory';
-import { BranchService } from 'src/app/core/services/hms/hostel-settings/branch.service';
 import { RoomCategoryService } from 'src/app/core/services/hms/hostel-settings/room-category.service';
-import { RoomService } from 'src/app/core/services/hms/hostel-settings/room.service';
+
 @Component({
-  selector: 'app-room',
-  templateUrl: './room.component.html',
-  styleUrls: ['./room.component.scss']
+  selector: 'app-room-category',
+  templateUrl: './room-category.component.html',
+  styleUrls: ['./room-category.component.scss']
 })
-export class RoomComponent implements OnInit {
+export class RoomCategoryComponent implements OnInit {
 
-  @ViewChild("modalRoom") modalRoom: TemplateRef<any>;
+  @ViewChild("modalRoomCategory") modalRoomCategory: TemplateRef<any>;
 
-  lstRoom: Room[] = new Array<Room>();
   lstRoomCategory: RoomCategory[] = new Array<RoomCategory>();
-  lstBranch: Branch[] = new Array<Branch>();
-  objRoom: Room = new Room();
-  selectedRoom: Room = new Room();
+  objRoomCategory: RoomCategory = new RoomCategory();
+  selectedRoomCategory: RoomCategory = new RoomCategory();
   public pageModel: PageModel;
 
   private gridApi;
@@ -45,9 +40,7 @@ export class RoomComponent implements OnInit {
 
 
   constructor(
-    private roomService: RoomService,
     private roomCategoryService: RoomCategoryService,
-    private branchService: BranchService,
     private swal: SweetAlertService,
     private router: Router,
     private modalService: NgbModal,
@@ -56,33 +49,9 @@ export class RoomComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    this.getAllBranch();
-    this.getAllRoomCategory();
   }
 
   getAll() {
-    this.lstRoom = [];
-    this.roomService.getAll().subscribe((response) => {
-      if (response) {
-        this.lstRoom = Object.assign(this.lstRoom, response);
-        this.lstRoom = [...this.lstRoom];
-        this.gridOptions.api.redrawRows();
-      }
-    }
-    );
-  }
-  getAllBranch() {
-    this.lstBranch = [];
-    this.branchService.getAll().subscribe((response) => {
-      if (response) {
-        this.lstBranch = Object.assign(this.lstBranch, response);
-        this.lstBranch = [...this.lstBranch];
-        this.gridOptions.api.redrawRows();
-      }
-    }
-    );
-  }
-  getAllRoomCategory() {
     this.lstRoomCategory = [];
     this.roomCategoryService.getAll().subscribe((response) => {
       if (response) {
@@ -95,19 +64,19 @@ export class RoomComponent implements OnInit {
   }
 
   add() {
-    this.objRoom = new Room();
+    this.objRoomCategory = new RoomCategory();
     this.gridApi.deselectAll();
-    this.modalService.open(this.modalRoom, { size: 'md', backdrop: 'static' });
+    this.modalService.open(this.modalRoomCategory, { size: 'md', backdrop: 'static' });
   }
 
   modalClose() {
-    this.modalService.dismissAll(this.modalRoom);
+    this.modalService.dismissAll(this.modalRoomCategory);
     this.gridApi.deselectAll();
   }
 
   async save() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.roomService.save(this.objRoom).subscribe(
+      this.roomCategoryService.save(this.objRoomCategory).subscribe(
         (response: HttpResponse<any>) => {
         if (response.status == HttpReturnStatus.Success) { 
             this.modalClose();
@@ -126,13 +95,13 @@ export class RoomComponent implements OnInit {
   }
 
   edit() {
-    this.objRoom = this.selectedRoom;
-    this.modalService.open(this.modalRoom, { size: 'md' });
+    this.objRoomCategory = this.selectedRoomCategory;
+    this.modalService.open(this.modalRoomCategory, { size: 'md' });
   }
 
   async update() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.roomService.update(this.objRoom).subscribe(
+      this.roomCategoryService.update(this.objRoomCategory).subscribe(
         (response: HttpResponse<any>) => {
         if (response.status == HttpReturnStatus.Success) { 
             this.modalClose();
@@ -152,7 +121,7 @@ export class RoomComponent implements OnInit {
 
   async deleteData() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.roomService.deleteByID(this.selectedRoom.roomId).subscribe(
+      this.roomCategoryService.deleteByID(this.selectedRoomCategory.roomCategoryId).subscribe(
         (response: HttpResponse<any>) => {
           if (response.status == HttpReturnStatus.Success) { 
             this.swal.message(response.body.message, SweetAlertEnum.success);
@@ -181,10 +150,10 @@ export class RoomComponent implements OnInit {
   onSelect() {
     const selectedRows = this.gridApi.getSelectedRows();
     if (selectedRows && selectedRows.length == 1) {
-      this.selectedRoom = selectedRows[0];
+      this.selectedRoomCategory = selectedRows[0];
     }
     else {
-      this.selectedRoom = new Room();
+      this.selectedRoomCategory = new RoomCategory();
     }
   }
 
@@ -214,8 +183,6 @@ const dataColumnDefs = [
     isVisible: true, field: 'slNo', headerName: 'SL', lockPosition: true, pinned: 'left',
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "branchId", headerName: 'Branch' } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "roomCategoryId", headerName: 'Room Category' } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "roomNumber", headerName: 'Room Number' } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "capacity", headerName: 'Bed Capacity' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "name", headerName: 'Room Category' } as ColDef,
+  { isVisible: true, field: "description", headerName: 'Description' } as ColDef,
 ];

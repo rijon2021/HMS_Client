@@ -8,7 +8,9 @@ import { HttpReturnStatus } from 'src/app/core/enums/globalEnum';
 import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-alert.service';
 import { PageModel } from 'src/app/core/models/core/pageModel';
 import { Bed } from 'src/app/core/models/hms/hostel-settings/bed';
+import { Room } from 'src/app/core/models/hms/hostel-settings/room';
 import { BedService } from 'src/app/core/services/hms/hostel-settings/bed.service';
+import { RoomService } from 'src/app/core/services/hms/hostel-settings/room.service';
 @Component({
   selector: 'app-bed',
   templateUrl: './bed.component.html',
@@ -19,6 +21,7 @@ export class BedComponent implements OnInit {
   @ViewChild("modalBed") modalBed: TemplateRef<any>;
 
   lstBed: Bed[] = new Array<Bed>();
+  lstRoom: Room[] = new Array<Room>();
   objBed: Bed = new Bed();
   selectedBed: Bed = new Bed();
   public pageModel: PageModel;
@@ -40,6 +43,7 @@ export class BedComponent implements OnInit {
 
   constructor(
     private bedService: BedService,
+    private roomService: RoomService,
     private swal: SweetAlertService,
     private router: Router,
     private modalService: NgbModal,
@@ -48,6 +52,7 @@ export class BedComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
+    this.getAllRoom();
   }
 
   getAll() {
@@ -56,6 +61,17 @@ export class BedComponent implements OnInit {
       if (response) {
         this.lstBed = Object.assign(this.lstBed, response);
         this.lstBed = [...this.lstBed];
+        this.gridOptions.api.redrawRows();
+      }
+    }
+    );
+  }
+  getAllRoom() {
+    this.lstRoom = [];
+    this.roomService.getAll().subscribe((response) => {
+      if (response) {
+        this.lstRoom = Object.assign(this.lstRoom, response);
+        this.lstRoom = [...this.lstRoom];
         this.gridOptions.api.redrawRows();
       }
     }
@@ -182,5 +198,5 @@ const dataColumnDefs = [
     isVisible: true, field: 'slNo', headerName: 'SL', lockPosition: true, pinned: 'left',
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "bedName", headerName: 'Bed Name' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "bedNumber", headerName: 'Bed Name' } as ColDef,
 ];

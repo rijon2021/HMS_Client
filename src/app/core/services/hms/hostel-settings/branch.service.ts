@@ -14,8 +14,8 @@ export class BranchService {
     let url = this.controllerName;
     return this.httpCommunicationService.get(url);
   }
-  getByID(userAutoID: number) {
-    let url = this.controllerName + '/getByID/' + userAutoID;
+  getByID(Id: number) {
+    let url = this.controllerName + '/getByID/' + Id;
     return this.httpCommunicationService.get(url);
   }
   save(obj) {
@@ -26,8 +26,8 @@ export class BranchService {
     let url = this.controllerName+'/'+obj.branchId;
     return this.httpCommunicationService.putJson(url, obj);
   }
-  deleteByID(userAutoID: number) {
-    let url = this.controllerName + '/' + userAutoID;
+  deleteByID(Id: number) {
+    let url = this.controllerName + '/' + Id;
     return this.httpCommunicationService.delete(url);
   }
   

@@ -27,6 +27,8 @@ import { BranchService } from 'src/app/core/services/hms/hostel-settings/branch.
 import { RoomService } from 'src/app/core/services/hms/hostel-settings/room.service';
 import { BedService } from 'src/app/core/services/hms/hostel-settings/bed.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { RoomCategoryComponent } from './room-category/room-category.component';
+import { RoomCategoryService } from 'src/app/core/services/hms/hostel-settings/room-category.service';
 
 
 // register FullCalendar plugins
@@ -40,6 +42,7 @@ FullCalendarModule.registerPlugins([
   declarations: [
     HostelsComponent,
     BranchComponent,
+    RoomCategoryComponent,
     RoomComponent,
     BedComponent,
   ],
@@ -71,6 +74,7 @@ FullCalendarModule.registerPlugins([
   providers: [
     HostelsService,
     BranchService,
+    RoomCategoryService,
     RoomService,
     BedService,
     DatePipe
