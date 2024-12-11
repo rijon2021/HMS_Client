@@ -7,6 +7,7 @@ export class Branch {
     email: string;
     amenities: any[];
     hostelId: number;
+    status: number;
     // hostel: Hostel;
     // rooms: Room[];
 }

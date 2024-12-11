@@ -1,3 +1,4 @@
+
 export enum Action {
     Insert = 1,
     Update,
@@ -62,21 +63,6 @@ export enum GlobalSettingEnum {
     Google_Map_Key = 3
 }
 
-export enum ApplicationType {
-    BCCase = 1,
-    SpecialCase = 2,
-    LUC = 3,
-    OccupancyCertificate = 4,
-    Others = 5,
-    NUC = 6,
-}
-
-export enum ApplicationStatus {
-    Initialize = 1,
-    Running = 2,
-    Completed = 3,
-}
-
 export enum AttachmentType {
     Audio = 1,
     Image = 2,
@@ -84,51 +70,67 @@ export enum AttachmentType {
     Map = 4,
     File = 5
 }
+// export enum ApplicationType {
+//     BCCase = 1,
+//     SpecialCase = 2,
+//     LUC = 3,
+//     OccupancyCertificate = 4,
+//     Others = 5,
+//     NUC = 6,
+// }
 
-export enum InspectionFileType {
-    Inspection = 1,
-    Technical = 2
-}
+// export enum ApplicationStatus {
+//     Initialize = 1,
+//     Running = 2,
+//     Completed = 3,
+// }
 
-export enum InspectionRoleType {
-    OfficerInCharge = 1,
-    AssistantOfficer = 1
-}
 
-export enum BuildingType {
-    Null = 1
-}
 
-export enum LandType {
-    FirmingLand = 1,
-    LivingLand = 2
-}
+// export enum InspectionFileType {
+//     Inspection = 1,
+//     Technical = 2
+// }
 
-export enum DrainType {
-    Paved = 1,
-    Raw = 2
-}
+// export enum InspectionRoleType {
+//     OfficerInCharge = 1,
+//     AssistantOfficer = 1
+// }
 
-export enum ElectricLineType {
-    LowTension = 1,
-    HighTension = 2
-}
+// export enum BuildingType {
+//     Null = 1
+// }
 
-export enum RoadNature {
-    None = 1,
-    Front = 2,
-    Connecting = 3
-}
+// export enum LandType {
+//     FirmingLand = 1,
+//     LivingLand = 2
+// }
 
-export enum AuthorizationStatus {
-    Authorized = 1,
-    Unauthorized = 2
-}
+// export enum DrainType {
+//     Paved = 1,
+//     Raw = 2
+// }
 
-export enum LUCFormat {
-    ATP = 1,
-    Draftman = 2,
-    GIS = 3
-}
+// export enum ElectricLineType {
+//     LowTension = 1,
+//     HighTension = 2
+// }
+
+// export enum RoadNature {
+//     None = 1,
+//     Front = 2,
+//     Connecting = 3
+// }
+
+// export enum AuthorizationStatus {
+//     Authorized = 1,
+//     Unauthorized = 2
+// }
+
+// export enum LUCFormat {
+//     ATP = 1,
+//     Draftman = 2,
+//     GIS = 3
+// }
 
 

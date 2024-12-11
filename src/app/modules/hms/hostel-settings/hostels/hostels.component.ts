@@ -4,10 +4,12 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColDef, GridOptions } from 'ag-grid-community';
-import { HttpReturnStatus } from 'src/app/core/enums/globalEnum';
+import {  HttpReturnStatus } from 'src/app/core/enums/globalEnum';
 import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-alert.service';
 import { PageModel } from 'src/app/core/models/core/pageModel';
+import { BaseStatus } from 'src/app/core/models/hms/hostel-settings/baseStatus';
 import { Hostels } from 'src/app/core/models/hms/hostel-settings/hostels';
+import { BaseStatusDataService } from 'src/app/core/services/hms/hostel-settings/base-status';
 import { HostelsService } from 'src/app/core/services/hms/hostel-settings/hostels.service';
 @Component({
   selector: 'app-hostels',
@@ -19,8 +21,10 @@ export class HostelsComponent implements OnInit {
   @ViewChild("modalHostels") modalHostels: TemplateRef<any>;
 
   lstHostels: Hostels[] = new Array<Hostels>();
+  lstStatus: BaseStatus[] = new Array<BaseStatus>();
   objHostels: Hostels = new Hostels();
   selectedHostels: Hostels = new Hostels();
+
   public pageModel: PageModel;
 
   private gridApi;
@@ -40,14 +44,19 @@ export class HostelsComponent implements OnInit {
 
   constructor(
     private hostelsService: HostelsService,
+    private baseStatusDataService: BaseStatusDataService,
     private swal: SweetAlertService,
     private router: Router,
     private modalService: NgbModal,
     private datePipe: DatePipe
-  ) { }
+  ) {
+    this.lstStatus = this.baseStatusDataService.BaseStatusData;
+   }
 
   ngOnInit() {
     this.getAll();
+    
+    
     // this.objHostels.establishedDateStr = this.datePipe.transform(this.objHostels.establishedDate, 'dd-MM-yyyy HH:mm:ss', '+0600');
     // this.objHostels.establishedDateStr = new Date(this.objHostels.establishedDateStr).toString().split(' ')[0];
   }
@@ -66,6 +75,7 @@ export class HostelsComponent implements OnInit {
 
   add() {
     this.objHostels = new Hostels();
+    this.objHostels.status = 1;
     this.gridApi.deselectAll();
     this.modalService.open(this.modalHostels, { size: 'md', backdrop: 'static' });
   }

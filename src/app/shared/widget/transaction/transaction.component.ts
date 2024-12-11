@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApplicationFileMaster } from 'src/app/core/models/cda/applicationFileMaster';
 
 @Component({
   selector: 'app-transaction',
@@ -9,7 +8,7 @@ import { ApplicationFileMaster } from 'src/app/core/models/cda/applicationFileMa
 })
 export class TransactionComponent implements OnInit {
 
-  selectedFile : ApplicationFileMaster = new ApplicationFileMaster();
+
 
   @Input() transactions: Array<{
     id?: string;

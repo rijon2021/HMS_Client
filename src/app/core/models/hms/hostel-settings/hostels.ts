@@ -10,4 +10,5 @@ export class Hostels {
     establishedDateStr: string;
     description: string;
     hostelManager: string;
+    status: number;
 }

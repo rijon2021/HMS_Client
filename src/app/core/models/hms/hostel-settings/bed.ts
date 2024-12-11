@@ -3,5 +3,6 @@ export class Bed {
     roomId: number;
     bedNumber: string;
     isAssigned: boolean;
+    status: number;
     // room: Room;
 }

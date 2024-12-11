@@ -78,6 +78,16 @@
         </div>
       </div>
     </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="branchId" class="col-md-5 col-form-label">Status <span class="required-star">*</span> </label>
+        <div class="col-md-7">
+          <select [(ngModel)]="objHostels.status" name="branchId" class="form-select select-control">
+            <option  *ngFor="let status of lstStatus" [value]="status.value"> {{status.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fas fa-times"></i>
