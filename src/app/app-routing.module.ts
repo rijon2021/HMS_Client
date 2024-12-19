@@ -33,6 +33,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/hms/hostel-settings/hostel-settings.module').then(m => m.HostelSettingsModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'member-staff-shared',
+    component: LayoutComponent,
+    loadChildren: () => import('./modules/hms/member-staff-shared/member-staff-shared.module').then(m => m.MemberStaffSharedModule),
+    canActivate: [AuthGuard]
+  },
  
 ];
 
