@@ -7,23 +7,21 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { HttpReturnStatus } from 'src/app/core/enums/globalEnum';
 import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-alert.service';
 import { PageModel } from 'src/app/core/models/core/pageModel';
-import { Bed } from 'src/app/core/models/hms/hostel-settings/bed';
-import { Room } from 'src/app/core/models/hms/hostel-settings/room';
-import { BedService } from 'src/app/core/services/hms/hostel-settings/bed.service';
-import { RoomService } from 'src/app/core/services/hms/hostel-settings/room.service';
+import { FoodItem } from 'src/app/core/models/hms/meal-management/foodItem';
+import { FoodItemService } from 'src/app/core/services/hms/meal-management/food-item.service';
+
 @Component({
-  selector: 'app-bed',
-  templateUrl: './bed.component.html',
-  styleUrls: ['./bed.component.scss']
+  selector: 'app-food-item',
+  templateUrl: './food-item.component.html',
+  styleUrls: ['./food-item.component.css']
 })
-export class BedComponent implements OnInit {
+export class FoodItemComponent implements OnInit {
 
-  @ViewChild("modalBed") modalBed: TemplateRef<any>;
+  @ViewChild("modalFoodItem") modalFoodItem: TemplateRef<any>;
 
-  lstBed: Bed[] = new Array<Bed>();
-  lstRoom: Room[] = new Array<Room>();
-  objBed: Bed = new Bed();
-  selectedBed: Bed = new Bed();
+  lstFoodItem: FoodItem[] = new Array<FoodItem>();
+  objFoodItem: FoodItem = new FoodItem();
+  selectedFoodItem: FoodItem = new FoodItem();
   public pageModel: PageModel;
 
   private gridApi;
@@ -42,8 +40,7 @@ export class BedComponent implements OnInit {
 
 
   constructor(
-    private bedService: BedService,
-    private roomService: RoomService,
+    private foodItemService: FoodItemService,
     private swal: SweetAlertService,
     private router: Router,
     private modalService: NgbModal,
@@ -51,46 +48,35 @@ export class BedComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    this.getAllRoom();
   }
 
   getAll() {
-    this.lstBed = [];
-    this.bedService.getAll().subscribe((response) => {
+    this.lstFoodItem = [];
+    this.foodItemService.getAll().subscribe((response) => {
       if (response) {
-        this.lstBed = Object.assign(this.lstBed, response);
-        this.lstBed = [...this.lstBed];
-        this.gridOptions.api.redrawRows();
-      }
-    }
-    );
-  }
-  getAllRoom() {
-    this.lstRoom = [];
-    this.roomService.getAll().subscribe((response) => {
-      if (response) {
-        this.lstRoom = Object.assign(this.lstRoom, response);
-        this.lstRoom = [...this.lstRoom];
+        this.lstFoodItem = Object.assign(this.lstFoodItem, response);
+        this.lstFoodItem = [...this.lstFoodItem];
         this.gridOptions.api.redrawRows();
       }
     }
     );
   }
 
+
   add() {
-    this.objBed = new Bed();
+    this.objFoodItem = new FoodItem();
     this.gridApi.deselectAll();
-    this.modalService.open(this.modalBed, { size: 'md', backdrop: 'static' });
+    this.modalService.open(this.modalFoodItem, { size: 'md', backdrop: 'static' });
   }
 
   modalClose() {
-    this.modalService.dismissAll(this.modalBed);
+    this.modalService.dismissAll(this.modalFoodItem);
     this.gridApi.deselectAll();
   }
 
   async save() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.bedService.save(this.objBed).subscribe(
+      this.foodItemService.save(this.objFoodItem).subscribe(
         (response: HttpResponse<any>) => {
         if (response.status == HttpReturnStatus.Success) { 
             this.modalClose();
@@ -109,13 +95,13 @@ export class BedComponent implements OnInit {
   }
 
   edit() {
-    this.objBed = this.selectedBed;
-    this.modalService.open(this.modalBed, { size: 'md' });
+    this.objFoodItem = this.selectedFoodItem;
+    this.modalService.open(this.modalFoodItem, { size: 'md' });
   }
 
   async update() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.bedService.update(this.objBed).subscribe(
+      this.foodItemService.update(this.objFoodItem).subscribe(
         (response: HttpResponse<any>) => {
         if (response.status == HttpReturnStatus.Success) { 
             this.modalClose();
@@ -135,7 +121,7 @@ export class BedComponent implements OnInit {
 
   async deleteData() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.bedService.deleteByID(this.selectedBed.bedId).subscribe(
+      this.foodItemService.deleteByID(this.selectedFoodItem.foodItemId).subscribe(
         (response: HttpResponse<any>) => {
           if (response.status == HttpReturnStatus.Success) { 
             this.swal.message(response.body.message, SweetAlertEnum.success);
@@ -164,10 +150,10 @@ export class BedComponent implements OnInit {
   onSelect() {
     const selectedRows = this.gridApi.getSelectedRows();
     if (selectedRows && selectedRows.length == 1) {
-      this.selectedBed = selectedRows[0];
+      this.selectedFoodItem = selectedRows[0];
     }
     else {
-      this.selectedBed = new Bed();
+      this.selectedFoodItem = new FoodItem();
     }
   }
 
@@ -197,5 +183,5 @@ const dataColumnDefs = [
     isVisible: true, field: 'slNo', headerName: 'SL', lockPosition: true, pinned: 'left',
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "bedNumber", headerName: 'Bed Name' } as ColDef,
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "foodItemName", headerName: 'Food Item Name' } as ColDef,
 ];

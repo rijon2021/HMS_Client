@@ -7,7 +7,7 @@ import { StaffPositionComponent } from './staff-position/staff-position.componen
 
 const routes: Routes = [
   { path: 'members', component: MemberComponent },
-  { path: 'staff-position', component: StaffPositionComponent },
+  { path: 'position', component: StaffPositionComponent },
   { path: 'staff', component: StaffComponent },
 ];
 

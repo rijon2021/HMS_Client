@@ -1,5 +1,5 @@
 export class StaffPosition {
-    staffPositionId: number;
+    positionId: number;
     positionName: string;
     description: string;
     hierarchyLevel: number;

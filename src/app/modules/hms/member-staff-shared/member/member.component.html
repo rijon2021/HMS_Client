@@ -61,6 +61,14 @@
     </div>
     <div class="col-md-12">
       <div class="mb-2 row">
+        <label for="Photo" class="col-md-3 col-form-label">Member Photo <span class="required-star">*</span> </label>
+        <div class="col-md-9">
+          <input id="Photo" class="form-control" type="file" [(ngModel)]="objMember.photo">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
         <label for="Staus" class="col-md-3 col-form-label">Status <span class="required-star">*</span> </label>
         <div class="col-md-9">
           <select [(ngModel)]="objMember.status" name="Staus" class="form-select select-control">

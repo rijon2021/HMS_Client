@@ -6,6 +6,7 @@ export class Members {
     identityNumber: string;
     mobile: string;
     email: string;
+    photo: string;
     address: string;
     status: number;
     branchId: number;

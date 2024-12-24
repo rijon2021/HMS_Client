@@ -7,34 +7,22 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { HttpReturnStatus } from 'src/app/core/enums/globalEnum';
 import { SweetAlertEnum, SweetAlertService } from 'src/app/core/helpers/sweet-alert.service';
 import { PageModel } from 'src/app/core/models/core/pageModel';
-import { BaseStatus } from 'src/app/core/models/hms/hostel-settings/baseStatus';
-import { Bed } from 'src/app/core/models/hms/hostel-settings/bed';
-import { Branch } from 'src/app/core/models/hms/hostel-settings/branch';
-import { Room } from 'src/app/core/models/hms/hostel-settings/room';
-import { Staff } from 'src/app/core/models/hms/member-settings/staff';
-import { BaseStatusDataService } from 'src/app/core/services/hms/hostel-settings/base-status';
-import { BedService } from 'src/app/core/services/hms/hostel-settings/bed.service';
-import { BranchService } from 'src/app/core/services/hms/hostel-settings/branch.service';
+import { FoodCategory } from 'src/app/core/models/hms/meal-management/foodCategory';
 import { RoomService } from 'src/app/core/services/hms/hostel-settings/room.service';
-import { StaffService } from 'src/app/core/services/hms/member-settings/staff.service';
-
+import { FoodCategoryService } from 'src/app/core/services/hms/meal-management/food-category.service';
 @Component({
-  selector: 'app-staff',
-  templateUrl: './staff.component.html',
-  styleUrls: ['./staff.component.css']
+  selector: 'app-food-category',
+  templateUrl: './food-category.component.html',
+  styleUrls: ['./food-category.component.css']
 })
-export class StaffComponent implements OnInit {
+export class FoodCategoryComponent implements OnInit {
 
-  @ViewChild("modalStaff") modalStaff: TemplateRef<any>;
+  @ViewChild("modalFoodCategory") modalFoodCategory: TemplateRef<any>;
 
-  lstStaff: Staff[] = new Array<Staff>();
-  objStaff: Staff = new Staff();
-  selectedStaff: Staff = new Staff();
+  lstFoodCategory: FoodCategory[] = new Array<FoodCategory>();
+  objFoodCategory: FoodCategory = new FoodCategory();
+  selectedFoodCategory: FoodCategory = new FoodCategory();
   public pageModel: PageModel;
-  lstStatus: BaseStatus[] = new Array<BaseStatus>();
-  lstBranch: Branch[] = new Array<Branch>();
-  lstRoom: Room[] = new Array<Room>();
-  lstBed: Bed[] = new Array<Bed>();
 
   private gridApi;
   private gridColumnApi;
@@ -52,87 +40,45 @@ export class StaffComponent implements OnInit {
 
 
   constructor(
-    private staffService: StaffService,
-    private branchService: BranchService,
-    private roomService: RoomService,
-    private bedService: BedService,
-    private baseStatusDataService: BaseStatusDataService,
+    private foodCategoryService: FoodCategoryService,
     private swal: SweetAlertService,
     private router: Router,
     private modalService: NgbModal,
-    private datePipe: DatePipe
-  ) {
-    this.lstStatus = this.baseStatusDataService.BaseStatusData;
-  }
+  ) { }
 
   ngOnInit() {
     this.getAll();
-    this.getAllBranch();
-    this.getAllRoom();
-    this.getAllBed();
   }
 
   getAll() {
-    this.lstStaff = [];
-    this.staffService.getAll().subscribe((response) => {
+    this.lstFoodCategory = [];
+    this.foodCategoryService.getAll().subscribe((response) => {
       if (response) {
-        this.lstStaff = Object.assign(this.lstStaff, response);
-        this.lstStaff = [...this.lstStaff];
-        this.gridOptions.api.redrawRows();
-      }
-    }
-    );
-  }
-  getAllBranch() {
-    this.lstBranch = [];
-    this.branchService.getAll().subscribe((response) => {
-      if (response) {
-        this.lstBranch = Object.assign(this.lstBranch, response);
-        this.lstBranch = [...this.lstBranch];
-        this.gridOptions.api.redrawRows();
-      }
-    }
-    );
-  }
-  getAllRoom() {
-    this.lstRoom = [];
-    this.roomService.getAll().subscribe((response) => {
-      if (response) {
-        this.lstRoom = Object.assign(this.lstRoom, response);
-        this.lstRoom = [...this.lstRoom];
-        this.gridOptions.api.redrawRows();
-      }
-    }
-    );
-  }
-  getAllBed() {
-    this.lstBed = [];
-    this.bedService.getAll().subscribe((response) => {
-      if (response) {
-        this.lstBed = Object.assign(this.lstBed, response);
-        this.lstBed = [...this.lstBed];
+        this.lstFoodCategory = Object.assign(this.lstFoodCategory, response);
+        this.lstFoodCategory = [...this.lstFoodCategory];
         this.gridOptions.api.redrawRows();
       }
     }
     );
   }
 
+
   add() {
-    this.objStaff = new Staff();
+    this.objFoodCategory = new FoodCategory();
     this.gridApi.deselectAll();
-    this.modalService.open(this.modalStaff, { size: 'lg', backdrop: 'static' });
+    this.modalService.open(this.modalFoodCategory, { size: 'md', backdrop: 'static' });
   }
 
   modalClose() {
-    this.modalService.dismissAll(this.modalStaff);
+    this.modalService.dismissAll(this.modalFoodCategory);
     this.gridApi.deselectAll();
   }
 
   async save() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.staffService.save(this.objStaff).subscribe(
+      this.foodCategoryService.save(this.objFoodCategory).subscribe(
         (response: HttpResponse<any>) => {
-          if (response.status == HttpReturnStatus.Success) {
+        if (response.status == HttpReturnStatus.Success) { 
             this.modalClose();
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
@@ -149,15 +95,15 @@ export class StaffComponent implements OnInit {
   }
 
   edit() {
-    this.objStaff = this.selectedStaff;
-    this.modalService.open(this.modalStaff, { size: 'lg' });
+    this.objFoodCategory = this.selectedFoodCategory;
+    this.modalService.open(this.modalFoodCategory, { size: 'md' });
   }
 
   async update() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.staffService.update(this.objStaff).subscribe(
+      this.foodCategoryService.update(this.objFoodCategory).subscribe(
         (response: HttpResponse<any>) => {
-          if (response.status == HttpReturnStatus.Success) {
+        if (response.status == HttpReturnStatus.Success) { 
             this.modalClose();
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
@@ -175,12 +121,12 @@ export class StaffComponent implements OnInit {
 
   async deleteData() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.staffService.deleteByID(this.selectedStaff.staffId).subscribe(
+      this.foodCategoryService.deleteByID(this.selectedFoodCategory.foodCategoryId).subscribe(
         (response: HttpResponse<any>) => {
-          if (response.status == HttpReturnStatus.Success) {
+          if (response.status == HttpReturnStatus.Success) { 
             this.swal.message(response.body.message, SweetAlertEnum.success);
             this.getAll();
-          } else {
+          }else{
             this.swal.message(response.body.message, SweetAlertEnum.error);
           }
         },
@@ -204,10 +150,10 @@ export class StaffComponent implements OnInit {
   onSelect() {
     const selectedRows = this.gridApi.getSelectedRows();
     if (selectedRows && selectedRows.length == 1) {
-      this.selectedStaff = selectedRows[0];
+      this.selectedFoodCategory = selectedRows[0];
     }
     else {
-      this.selectedStaff = new Staff();
+      this.selectedFoodCategory = new FoodCategory();
     }
   }
 
@@ -237,19 +183,5 @@ const dataColumnDefs = [
     isVisible: true, field: 'slNo', headerName: 'SL', lockPosition: true, pinned: 'left',
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "fullName", headerName: 'Staff Name' } as ColDef,
-  { isVisible: true, field: "gender", headerName: 'Gender' } as ColDef,
-  {
-    isVisible: true, field: "dateOfBirth",
-    valueFormatter: (params) => {
-      const date = new Date(params.value);
-      const datePipe = new DatePipe('en-US');
-      const cDate = datePipe.transform(params.value, 'dd-MM-yyyy HH:mm:ss', '+0600');
-      return cDate.toString().split(' ')[0];
-    }, headerName: 'Date Of Birth'
-  } as ColDef,
-  { isVisible: true, field: "mobile", headerName: 'Mobile' } as ColDef,
-  { isVisible: true, field: "email", headerName: 'Emial' } as ColDef,
-  { isVisible: true, field: "address", headerName: 'Address' } as ColDef,
-
+  { isVisible: true, lockPosition: true, pinned: 'left', field: "foodCategoryName", headerName: 'Food Category Name' } as ColDef,
 ];

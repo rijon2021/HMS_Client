@@ -47,6 +47,7 @@ export class StaffPositionComponent implements OnInit {
     rowDragManaged: true,
     getRowHeight: () => 40,
     defaultColDef: dataDefaultColDef,
+   
   }
 
 
@@ -174,7 +175,7 @@ export class StaffPositionComponent implements OnInit {
 
   async deleteData() {
     if (await this.swal.confirm_custom('Are you sure?', SweetAlertEnum.question, true, false)) {
-      this.staffPositionService.deleteByID(this.selectedStaffPosition.staffPositionId).subscribe(
+      this.staffPositionService.deleteByID(this.selectedStaffPosition.positionId).subscribe(
         (response: HttpResponse<any>) => {
           if (response.status == HttpReturnStatus.Success) {
             this.swal.message(response.body.message, SweetAlertEnum.success);
@@ -236,12 +237,8 @@ const dataColumnDefs = [
     isVisible: true, field: 'slNo', headerName: 'SL', lockPosition: true, pinned: 'left',
     suppressMovable: true, valueGetter: "node.rowIndex + 1", resizable: false, width: 80
   } as ColDef,
-  { isVisible: true, lockPosition: true, pinned: 'left', field: "fullName", headerName: 'StaffPosition Name' } as ColDef,
-  { isVisible: true, field: "gender", headerName: 'Gender' } as ColDef,
-  { isVisible: true, field: "dateOfBirth", headerName: 'Date4 Of Birth' } as ColDef,
-  { isVisible: true, field: "mobile", headerName: 'Mobile' } as ColDef,
-  { isVisible: true, field: "email", headerName: 'Emial' } as ColDef,
-  { isVisible: true, field: "address", headerName: 'Address' } as ColDef,
-  // { isVisible: true, field: "dateOfBirth", headerName: 'Mobile' } as ColDef,
+  { isVisible: true, field: "positionName", headerName: 'Position Name' } as ColDef,
+  { isVisible: true, field: "description", headerName: 'Description' } as ColDef,
+  { isVisible: true, field: "hierarchyLevel", headerName: 'Hierarchy Level' } as ColDef,
   // { isVisible: true, field: "dateOfBirth", headerName: 'Mobile' } as ColDef,
 ];

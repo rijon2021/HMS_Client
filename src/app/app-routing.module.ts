@@ -39,6 +39,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/hms/member-staff-shared/member-staff-shared.module').then(m => m.MemberStaffSharedModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'meal-management',
+    component: LayoutComponent,
+    loadChildren: () => import('./modules/hms/meal-management/meal-management.module').then(m => m.MealManagementModule),
+    canActivate: [AuthGuard]
+  },
  
 ];
 

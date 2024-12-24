@@ -5,25 +5,38 @@
     <h4 class="modal-title" id="modal-basic-title">Add New Staff Position</h4>
   </div>
   <div class="modal-body">
-    
     <div class="col-md-12">
       <div class="mb-2 row">
-        <label for="name" class="col-md-3 col-form-label">Staff Position Name <span class="required-star">*</span> </label>
+        <label for="PositionName" class="col-md-3 col-form-label">Staff Position Name <span class="required-star">*</span> </label>
         <div class="col-md-9">
-          <input id="name" class="form-control" type="text" [(ngModel)]="objStaffPosition.positionName">
+          <input id="PositionName" class="form-control" type="text" [(ngModel)]="objStaffPosition.positionName">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="description" class="col-md-3 col-form-label">Description <span class="required-star">*</span> </label>
+        <div class="col-md-9">
+          <textarea id="description" class="form-control" [(ngModel)]="objStaffPosition.description"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-2 row">
+        <label for="hierarchyLevel" class="col-md-3 col-form-label">Hierarchy Level<span class="required-star">*</span> </label>
+        <div class="col-md-9">
+          <input id="hierarchyLevel" class="form-control" type="text" [(ngModel)]="objStaffPosition.hierarchyLevel">
         </div>
       </div>
     </div>
     
-    
-
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="modalClose()"><i class="fas fa-times"></i>
       Close</button>
-    <button type="button" *ngIf="!objStaffPosition.staffPositionId" class="btn btn-success" (click)="save()" [disabled]="!(objStaffPosition.positionName)"><i class="fas fa-save"></i>
+    <button type="button" *ngIf="!objStaffPosition.positionId" class="btn btn-success" (click)="save()" [disabled]="!(objStaffPosition.positionName)"><i class="fas fa-save"></i>
       Save</button>
-    <button type="button" *ngIf="objStaffPosition.staffPositionId>0"  class="btn btn-success" (click)="update()" [disabled]="!(objStaffPosition.positionName)"><i class="fas fa-save"></i>
+    <button type="button" *ngIf="objStaffPosition.positionId>0"  class="btn btn-success" (click)="update()" [disabled]="!(objStaffPosition.positionName)"><i class="fas fa-save"></i>
       Update</button>
   </div>
 </ng-template>
@@ -34,9 +47,9 @@
   <div class="row">
     <div class="col-md-10 my-1">
       <button (click)="add()" class="btn btn-success me-1"><i class="fa fa-plus"></i> Add New</button>
-      <button *ngIf="selectedStaffPosition.staffPositionId > 0" (click)="edit()" class="btn btn-primary mx-1"><i
+      <button *ngIf="selectedStaffPosition.positionId > 0" (click)="edit()" class="btn btn-primary mx-1"><i
           class="fa fa-edit"></i> Edit</button>
-      <button *ngIf="selectedStaffPosition.staffPositionId > 0" (click)="deleteData()" class="btn btn-danger mx-1"><i
+      <button *ngIf="selectedStaffPosition.positionId > 0" (click)="deleteData()" class="btn btn-danger mx-1"><i
           class="fa fa-trash"></i> Delete</button>
       <!-- <button (click)="updateOrder()" class="btn btn-dark mx-1"><i class="fa fa-check"></i> Update Order</button> -->
       <!-- <button (click)="onBtnExport()" class="btn btn-outline-info mx-1"><i class="fas fa-file-excel"></i> Excel</button> -->

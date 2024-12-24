@@ -4,8 +4,10 @@ import { HttpCommunicationService } from '../../http-communication.service';
 
 
 @Injectable({ providedIn: "root" })
-export class StaffPositionService {
-  private controllerName = 'Position';
+
+export class FoodItemService {
+
+  private controllerName = 'FoodItem';
   constructor(
     private httpCommunicationService: HttpCommunicationService
   ) { }
@@ -23,7 +25,7 @@ export class StaffPositionService {
     return this.httpCommunicationService.postJson(url, obj);
   }
   update(obj) {
-    let url = this.controllerName+'/'+obj.positionId;
+    let url = this.controllerName+'/'+obj.foodItemId;
     return this.httpCommunicationService.putJson(url, obj);
   }
   deleteByID(Id: number) {
