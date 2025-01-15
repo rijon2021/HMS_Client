@@ -109,11 +109,13 @@ export class LoginComponent implements OnInit {
     localStorage.setItem(LOCALSTORAGE_KEY.GLOBAL_SETTINGS, JSON.stringify(authUser.globalSettings));
     localStorage.setItem(LOCALSTORAGE_KEY.USER_IMAGE, (authUser.userImage == null) ? "" : authUser.userImage.toString());
 
-    let globalSetting: GlobalSetting[] = authUser.globalSettings;
-    let mapApiKey = globalSetting.find(x => x.globalSettingID == GlobalSettingEnum.Google_Map_Key && x.isActive == true);
-    if (mapApiKey != null || mapApiKey != undefined) {
-      localStorage.setItem(LOCALSTORAGE_KEY.GOOGLE_MAP_API_KEY, JSON.stringify(mapApiKey.valueInString));
-    }
+   
+    // let globalSetting: GlobalSetting[] = authUser.globalSettings;
+    // let gsetings:any = globalSetting.values;
+    // let mapApiKey = globalSetting.find(x => x.globalSettingID == GlobalSettingEnum.Google_Map_Key && x.isActive == true);
+    // if (mapApiKey != null || mapApiKey != undefined) {
+      localStorage.setItem(LOCALSTORAGE_KEY.GOOGLE_MAP_API_KEY, JSON.stringify(500));
+    // }
   }
 
   onCPasswordToggle() {
